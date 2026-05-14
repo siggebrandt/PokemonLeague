@@ -80,7 +80,13 @@
 
 
 
+#startPage {
+    display: none;
+}
 
+body {
+    margin: 0;
+}
 
 #pokemon-page {
     display: flex;
@@ -112,6 +118,15 @@
 
 #header-contents-right {
     margin-right: 20px;
+}
+
+#arrow-back {
+    background-image: url(icons/arrow_back_ios_new_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 40px;
+    height: 40px;
 }
 
 #pokemon-image {
@@ -156,4 +171,19 @@
 .trainer-label {
     background-color: #ffe5cc;
     color: #f28212;
+}
+
+.pokemon-points-and-placement {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.pokemon-points-and-placement h2,
+.pokemon-points-and-placement p {
+    margin: 0;
+}
+
+.seperator {
+    border-right: 1px solid #93928e;
 }

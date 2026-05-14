@@ -57,13 +57,7 @@
 
 
 
-#startPage {
-    display: none;
-}
 
-body {
-    margin: 0;
-}
 
 #pokemon-page {
     display: flex;

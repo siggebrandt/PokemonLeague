@@ -93,6 +93,16 @@ body {
     flex-direction: column;
     width: 100vw;
     height: 100vh;
+    background-color: rgba(250, 250, 250, 0.75);
+}
+
+.pokemon-page-background {
+    background-image: url(bilder/choose\ pokemon.png);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100vw;
+    height: 100vh;
 }
 
 #pokemon-page-header {
@@ -100,7 +110,7 @@ body {
     justify-content: space-between;
     align-items: center;
     width: 100vw;
-    height: 25vh;
+    height: 20vh;
     background-color: #f5f4ed;
 }
 
@@ -117,11 +127,11 @@ body {
 }
 
 #header-contents-right {
-    margin-right: 20px;
+    margin-right: 25px;
 }
 
 #arrow-back {
-    background-image: url(icons/arrow_back_ios_new_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg);
+    background-image: url(icons/arrowback.svg);
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -176,7 +186,9 @@ body {
 .pokemon-points-and-placement {
     display: flex;
     flex-direction: column;
-    padding: 10px;
+    justify-content: center;
+    align-items: flex-end;
+    padding: 20px;
 }
 
 .pokemon-points-and-placement h2,

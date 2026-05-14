@@ -1,0 +1,28 @@
+#pokemonGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 16px;
+    padding: 16px;
+}
+
+.pokemonCard {
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    width: 120px;
+}
+
+.pokemonCardImage {
+    width: 100%;
+    object-fit: contain;
+    background-color: #e8f4e8;
+}
+
+.pokemonName {
+    text-align: center;
+    padding: 15px 0;
+    background-color: white;
+    font-size: 18px;
+    margin: 0;
+}

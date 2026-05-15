@@ -3,8 +3,10 @@ let navBar = document.querySelector("#navBar");
 let pokemonGrid = document.querySelector("#pokemonGrid");
 let gymCardContainer = document.querySelector("#gymCardContainer")
 let chosenGen = seasons[0];
+let gymPage = document.querySelector("#gymPage");
 numberOfSeason = seasons.length;
 
+//STARTSIDA
 //Skapa navBar 
 seasons.forEach((generation, index) => {
     //Loopar igenom alla säsonger och bygger själva knappen. Använder forEach så att jag kan använda index.
@@ -39,6 +41,7 @@ disciplines.forEach((gym) => {
 
     //Event listener
     gymCard.addEventListener("click", () => {
+        renderGymPage(gym)
         //Här kanske man anropar någon funktion.
         //Kan till exempel stå renderGymPage(gym);
     })
@@ -103,5 +106,25 @@ function renderPokemonGrid(gen) {
         createPokemonCards(thisGenPokemons);
     }
 }
+
 renderPokemonGrid(null);
-// Detta är sebbes branch
+
+//STARTSIDA
+//GYMSIDA
+function renderGymPage(gym) {
+    console.log(gym)
+    startPage.classList.add("hide");
+    gymPage.classList.remove("hide");
+    createRadarChart(gym);
+}
+
+function createRadarChart(gym) {
+    let skillPoints = []
+    for (let skill in gym.skillFactors) {
+        skillPoints.push(gym.skillFactors[skill]);
+    }
+    console.log(skillPoints)
+
+
+}
+//GYMSIDA

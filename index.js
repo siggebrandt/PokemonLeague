@@ -36,6 +36,12 @@ disciplines.forEach((gym) => {
     gymImage.src = gym.image;
     gymName.textContent = gym.gymName;
     gymName.style.backgroundColor = gym.color;
+
+    //Event listener
+    gymCard.addEventListener("click", () => {
+        //Här kanske man anropar någon funktion.
+        //Kan till exempel stå renderGymPage(gym);
+    })
 })
 
 //Skapade funktionen lite i efterhand för jag insåg att det blir mindre kod att bara anropa denna
@@ -60,6 +66,12 @@ function createPokemonCards(pokemonArray) {
         let imageUrl = getPokemonImageUrl(pokemon.dexNumber);
         pokemonImg.src = imageUrl;
         pokemonName.textContent = pokemon.pokemonName;
+
+        //Event listener
+        pokemonCard.addEventListener("click", () => {
+            //Här kanske man anropar någon funktion.
+            //Kan till exempel stå renderPokemonPage(pokemon);
+        })
     })
 }
 

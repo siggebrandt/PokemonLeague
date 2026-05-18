@@ -111,6 +111,8 @@ renderPokemonGrid(null);
 
 //STARTSIDA
 //GYMSIDA
+
+let radarChartSvg = document.querySelector("#radarChartSvg");
 function renderGymPage(gym) {
     console.log(gym)
     startPage.classList.add("hide");
@@ -119,12 +121,92 @@ function renderGymPage(gym) {
 }
 
 function createRadarChart(gym) {
-    let skillPoints = []
+    //Loopar igenom skillfactors och pushar in value för varje skill i en ny array
+    let skillPoints = [];
     for (let skill in gym.skillFactors) {
         skillPoints.push(gym.skillFactors[skill]);
     }
-    console.log(skillPoints)
+    let dots = [];
+    //Mitt punkten av svg, den är 300 bred och hög.
+    let centerPoint = 150;
+    let numOfSkills = skillPoints.length
+    //2 * PI är 360 grader. Delar det på hur många skills som finns, i detta fall blir det 5.
+    let anglePerSkill = (2 * Math.PI) / numOfSkills;
+
+    //Ritar nätet bakom huvudpolygonen i olika storlekar.
+    drawBackgroundPolygon(25, numOfSkills, anglePerSkill, centerPoint);
+    drawBackgroundPolygon(50, numOfSkills, anglePerSkill, centerPoint);
+    drawBackgroundPolygon(75, numOfSkills, anglePerSkill, centerPoint);
+    drawBackgroundPolygon(100, numOfSkills, anglePerSkill, centerPoint);
+
+    skillPoints.forEach((skill, index) => {
+        //console.log(skill, index)
+        //Räknar ut vinkeln för denna punkt. - Math.PI / 2 gör så att första punkten börjar högst upp.
+        let angle = index * anglePerSkill - Math.PI / 2;
+        //x och y är kordinater för punkten. Skill * 5 skalar upp värdet så det är synligt men man hade
+        //kunnat skriva utan, men man hade knappt sett något.
+        //Math.cos och .sin omvandlar vinkeln till en riktning. .cos i x led och .sin i y led.
+        let x = centerPoint + Math.cos(angle) * skill * 5;
+        let y = centerPoint + Math.sin(angle) * skill * 5;
+        //x och y här är kordinater för texten. Jag multiplicerar inte med skill här för texten
+        //ska inte röra sig om det är ett specifikt värde, utan den ska alltid vara på samma plats. 
+        let textX = centerPoint + Math.cos(angle) * 120;
+        let textY = centerPoint + Math.sin(angle) * 120;
+        dots.push(`${x},${y}`);
+
+        d3.select(radarChartSvg)
+            .append("image")
+            .attr("href", "bilder/2233235_0c846.png")
+            .attr("x", x - 10)
+            .attr("y", y - 10)
+            .attr("height", 20)
+            .attr("width", 20)
+            .on("mouseover", () => {
+                console.log(skill);
+            })
+
+        d3.select(radarChartSvg)
+            .append("text")
+            .attr("x", textX)
+            .attr("y", textY)
+            .text(skills[index].name)
+            .attr("text-anchor", "middle")
+    })
+
+    d3.select(radarChartSvg)
+        .append("polygon")
+        .attr("points", dots.join(" "))
+        .attr("fill", "rgba(255, 0, 0, 0.1)")
+        .attr("stroke", "red")
+        .attr("stroke-width", 2)
 
 
 }
+
+function drawBackgroundPolygon(distance, numOfSkills, anglePerSkill, centerPoint) {
+    let backgroundDots = [];
+    for (let i = 0; i < numOfSkills; i++) {
+        let angle = i * anglePerSkill - Math.PI / 2;
+        let x = centerPoint + Math.cos(angle) * distance;
+        let y = centerPoint + Math.sin(angle) * distance;
+        backgroundDots.push(`${x}, ${y}`);
+    }
+    d3.select(radarChartSvg)
+        .append("polygon")
+        .attr("points", backgroundDots.join(" "))
+        .attr("fill", "none")
+        .attr("stroke", "lightgrey")
+        .attr("stroke-width", 1)
+}
+
+createRadarChart({
+    id: 1,
+    name: "D01",
+    gymName: "Fire gym",
+    color: "red",
+    image: "bilder/fcf9d85f-9ff6-4bc5-9dc3-bce99de7f930.png",
+    skillFactors: {
+        S01: 13, S02: 12, S03: 14, S04: 17, S05: 20,
+    },
+})
 //GYMSIDA

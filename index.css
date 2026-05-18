@@ -1,3 +1,16 @@
+* {
+    margin: 0;
+    padding: 0; 
+    border: 0;
+    box-sizing: border-box;
+    font-family: "Nunito", system-ui;
+}
+
+#navBar button {
+padding: 1px 6px;
+border: 2px solid black;
+}
+
 .hide {
     display: none;
 }
@@ -58,7 +71,12 @@
 
 
 
-
+/* - GymPage - */
+#gymBanner {
+    background-color: #b3e0ff;
+    height: 75px;
+    text-align: center;
+}
 
 
 

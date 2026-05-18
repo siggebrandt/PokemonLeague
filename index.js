@@ -137,9 +137,11 @@ renderPokemonGrid(null);
 
 let radarChartSvg = document.querySelector("#radarChartSvg");
 function renderGymPage(gym) {
-    console.log(gym)
+    console.log(gym);
     startPage.classList.add("hide");
     gymPage.classList.remove("hide");
+    document.querySelector("#gymBannerTitle").textContent = gym.gymName;
+
     createRadarChart(gym);
 }
 

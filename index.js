@@ -18,6 +18,8 @@ const trainerSkillLabel = document.getElementById("trainer-skill-label");
 const pokemonTopScore = document.getElementById("pokemon-top-score");
 const pokemonTotalScore = document.getElementById("pokemon-total-score");
 const pokemonTopPlacement = document.getElementById("pokemon-top-placement");
+const mainPokemonPage = document.getElementById("pokemon-page-main");
+const pokemoPageScoreSvg = document.getElementById("pokemon-page-score-svg");
 
 numberOfSeason = seasons.length;
 let currentGen = seasons;
@@ -32,6 +34,7 @@ seasons.forEach((generation, index) => {
 
     genButton.addEventListener("click", () => {
         chosenGen = seasons[index];
+        currentGen = [chosenGen];
         renderPokemonGrid(chosenGen);
     })
     //console.log(generation, index)
@@ -458,6 +461,54 @@ function renderPokemonPage(pokemon) {
         if (myTopPlacement > placement) myTopPlacement = placement;
     }
     pokemonTopPlacement.textContent = `#${myTopPlacement}`;
+
+
+    // Skapar svg
+    pokemoPageScoreSvg.textContent = "";
+
+    const svgData = [];
+    for (let i = 0; i < scores.length; i++) {
+        const dataObject = { x: i + 1, y: scores[i] };
+        svgData.push(dataObject);
+    };
+
+    const width = 1200;
+    const height = 300;
+    const margin = 40;
+
+    const svg = d3.select("#pokemon-page-score-svg")
+        .append("svg")
+        .attr("width", width)
+        .attr("height", height);
+
+    const xScale = d3.scaleLinear()
+        .domain(d3.extent(svgData, data => data.x))
+        .range([margin, width - margin]);
+
+    const yScale = d3.scaleLinear()
+        .domain([d3.min(svgData, data => data.y - 50), d3.max(svgData, data => data.y)])
+        .range([height - margin, margin]);
+
+    const line = d3.line()
+        .x(data => xScale(data.x))
+        .y(data => yScale(data.y));
+
+    svg.append("path")
+        .datum(svgData)
+        .attr("fill", "none")
+        .attr("stroke", "black")
+        .attr("stroke-width", 2)
+        .attr("d", line);
+
+    svg.append("g")
+        .attr("transform", `translate(0, ${height - margin})`)
+        .call(d3.axisBottom(xScale));
+
+    svg.append("g")
+        .attr("transform", `translate(${margin}, 0)`)
+        .call(d3.axisLeft(yScale));
+
+
 }
 
 pokemonPageArrowBack.addEventListener("click", function () {

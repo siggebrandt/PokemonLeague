@@ -1,10 +1,26 @@
+const body = document.querySelector("body");
+
 let startPage = document.querySelector("#startPage");
 let navBar = document.querySelector("#navBar");
 let pokemonGrid = document.querySelector("#pokemonGrid");
 let gymCardContainer = document.querySelector("#gymCardContainer")
 let chosenGen = seasons[0];
 let gymPage = document.querySelector("#gymPage");
+
+const pokemonPage = document.getElementById("pokemon-page");
+const pokemonPageArrowBack = document.getElementById("pokemon-page-arrow-back");
+const pokemonPicture = document.getElementById("pokemon-picture");
+const pokemonLabelsContainer = document.getElementById("labels-container");
+const pokemonNameLabel = document.getElementById("pokemon-name-label");
+const pokemonGenLabel = document.getElementById("generation-label");
+const trainerNameLabel = document.getElementById("trainer-name-label");
+const trainerSkillLabel = document.getElementById("trainer-skill-label");
+const pokemonTopScore = document.getElementById("pokemon-top-score");
+const pokemonTotalScore = document.getElementById("pokemon-total-score");
+const pokemonTopPlacement = document.getElementById("pokemon-top-placement");
+
 numberOfSeason = seasons.length;
+let currentGen = seasons;
 
 //STARTSIDA
 //Skapa navBar 
@@ -72,8 +88,12 @@ function createPokemonCards(pokemonArray) {
 
         //Event listener
         pokemonCard.addEventListener("click", () => {
-            //Här kanske man anropar någon funktion.
-            //Kan till exempel stå renderPokemonPage(pokemon);
+            body.classList.add("pokemon-page-background");
+            startPage.classList.add("hide");
+            pokemonPage.classList.remove("hide");
+            pokemonPicture.style.backgroundImage = `url(${imageUrl})`;
+
+            renderPokemonPage(pokemon);
         })
     })
 }
@@ -199,3 +219,249 @@ function drawBackgroundPolygon(distance, numOfSkills, anglePerSkill, centerPoint
         .attr("stroke-width", 1)
 }
 //GYMSIDA
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function renderPokemonPage(pokemon) {
+    // Fyller i generation och tränare på vänster sida av navbaren.
+    pokemonNameLabel.textContent = pokemon.pokemonName;
+
+    //Kollar först om vi valt en generation, då blir currentGen.length 1. Om vi inte valt någon generation visas alla (ALL == NaN).
+    const getCurrentGenNumber = currentGen.length === 1 ? currentGen.map(gen => gen.year + 1) : NaN;
+    pokemonGenLabel.textContent = getCurrentGenNumber ? `Generation ${getCurrentGenNumber}` : "All Generations";
+
+    while (pokemonLabelsContainer.children.length > 1) {
+        pokemonLabelsContainer.lastElementChild.remove();
+    };
+
+    const currentTrainersId = currentGen.map(gen => gen.trainers.find(trainer => trainer.participantId === pokemon.id)).filter(trainer => trainer != undefined).map(trainer => trainer.trainerId);
+    const trainerNames = currentTrainersId.map(trainer => trainers.find(t => t.id === trainer)).map(trainer => trainer.name);
+
+    trainerNames.forEach(name => {
+        const div = document.createElement("div");
+        div.classList.add("label");
+        div.classList.add("trainer-label")
+        div.textContent = name;
+        pokemonLabelsContainer.append(div);
+    });
+
+
+    // Fyller i poäng och placering på höger sida av navbaren.
+
+    // Kolla upp .flatMap, med .map får man en massa arrayer inuti arrayer t.ex: [[1], [2], [3], [4]], men med.flatMap samlas alla scores t.ex såhär: [1, 2, 3, 4].
+    const scores = currentGen.flatMap(gen => gen.competitionDays).flatMap(day => day.events).flatMap(event => event.scores).filter(score => score.participantId === pokemon.id).flatMap(id => id.score);
+
+    // Räknar ut vilket som var pokemonens högsta score.
+    let highscore = 0;
+    scores.forEach(score => {
+        highscore = score > highscore ? score : highscore;
+    })
+    pokemonTopScore.textContent = `${highscore}`;
+
+    // Räknar ihop alla scores pokemonen fått.
+    const totalScore = scores.reduce((acc, current) => {
+        return acc + current;
+    }, 0);
+    pokemonTotalScore.textContent = `${totalScore}`;
+
+    // Jämför min valda pokemons score med de andra i samma omgång för att ta reda på vilken runda den spelade bäst i.
+    const gameDays = currentGen.flatMap(gen => gen.competitionDays).flatMap(day => day.events).map(event => event.scores).filter(score => score.some(participant => participant.participantId === pokemon.id));
+
+    let allPlacements = [];
+    let gameDayIndex = 0;
+    for (let score of scores) {
+        const betterParticipants = gameDays[gameDayIndex].filter(game => game.score > score);
+        const myPlacement = betterParticipants.length > 0 ? betterParticipants.length + 1 : 1;
+        allPlacements.push(myPlacement);
+        gameDayIndex++;
+    }
+
+    let myTopPlacement = 6;
+    for (let placement of allPlacements) {
+        if (myTopPlacement > placement) myTopPlacement = placement;
+    }
+    pokemonTopPlacement.textContent = `#${myTopPlacement}`;
+}
+
+pokemonPageArrowBack.addEventListener("click", function () {
+    body.classList.remove("pokemon-page-background");
+    pokemonPage.classList.add("hide");
+    startPage.classList.remove("hide");
+})

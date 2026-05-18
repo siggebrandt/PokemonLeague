@@ -473,8 +473,9 @@ function renderPokemonPage(pokemon) {
     };
 
     const width = 1200;
-    const height = 300;
+    const height = 400;
     const margin = 40;
+
 
     const svg = d3.select("#pokemon-page-score-svg")
         .append("svg")
@@ -486,7 +487,7 @@ function renderPokemonPage(pokemon) {
         .range([margin, width - margin]);
 
     const yScale = d3.scaleLinear()
-        .domain([d3.min(svgData, data => data.y - 50), d3.max(svgData, data => data.y)])
+        .domain([d3.min(svgData, data => data.y) - 50, d3.max(svgData, data => data.y) + 50])
         .range([height - margin, margin]);
 
     const line = d3.line()
@@ -497,8 +498,17 @@ function renderPokemonPage(pokemon) {
         .datum(svgData)
         .attr("fill", "none")
         .attr("stroke", "black")
-        .attr("stroke-width", 2)
         .attr("d", line);
+
+    svg.selectAll("image")
+        .data(svgData)
+        .enter()
+        .append("image")
+        .attr("href", "bilder/2233235_0c846.png")
+        .attr("x", d => xScale(d.x) - 15)
+        .attr("y", d => yScale(d.y) - 15)
+        .attr("width", 30)
+        .attr("height", 30);
 
     svg.append("g")
         .attr("transform", `translate(0, ${height - margin})`)
@@ -508,7 +518,13 @@ function renderPokemonPage(pokemon) {
         .attr("transform", `translate(${margin}, 0)`)
         .call(d3.axisLeft(yScale));
 
-
+    svg.append("text")
+        .attr("x", width / 2)
+        .attr("y", 30)
+        .attr("text-anchor", "middle")
+        .style("font-size", "24px")
+        .style("font-weight", "bold")
+        .text("Score over time");
 }
 
 pokemonPageArrowBack.addEventListener("click", function () {

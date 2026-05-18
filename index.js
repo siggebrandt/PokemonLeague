@@ -4,17 +4,7 @@ let pokemonGrid = document.querySelector("#pokemonGrid");
 let gymCardContainer = document.querySelector("#gymCardContainer")
 let chosenGen = seasons[0];
 let gymPage = document.querySelector("#gymPage");
-
-const pokemonPage = document.getElementById("pokemon-page");
-const pokemonPicture = document.getElementById("pokemon-picture");
-const pokemonLabelsContainer = document.getElementById("labels-container");
-const pokemonNameLabel = document.getElementById("pokemon-name-label");
-const pokemonGenLabel = document.getElementById("generation-label");
-const trainerNameLabel = document.getElementById("trainer-name-label");
-const trainerSkillLabel = document.getElementById("trainer-skill-label");
-
 numberOfSeason = seasons.length;
-let currentGen = seasons;
 
 //STARTSIDA
 //Skapa navBar 
@@ -26,7 +16,6 @@ seasons.forEach((generation, index) => {
 
     genButton.addEventListener("click", () => {
         chosenGen = seasons[index];
-        currentGen = [chosenGen];
         renderPokemonGrid(chosenGen);
     })
     //console.log(generation, index)
@@ -39,7 +28,7 @@ disciplines.forEach((gym) => {
     let gymName = document.createElement("p");
     gymCard.classList.add("gymCards");
     gymImage.classList.add("gymImages");
-    gymName.classList.add("gymNames");
+    gymName.classList.add("gymNames")
 
     //Append
     gymCardContainer.appendChild(gymCard);
@@ -75,19 +64,16 @@ function createPokemonCards(pokemonArray) {
         pokemonGrid.appendChild(pokemonCard);
         pokemonCard.appendChild(pokemonImg);
         pokemonCard.appendChild(pokemonName);
-        console.log(pokemon);
 
         //Hämtar en url från funktionen getPokemonImageUrl och lägger in the på image soruce.
         let imageUrl = getPokemonImageUrl(pokemon.dexNumber);
         pokemonImg.src = imageUrl;
         pokemonName.textContent = pokemon.pokemonName;
 
-        pokemonCard.addEventListener("click", function () {
-            startPage.style.display = "none";
-            pokemonPage.style.display = "flex";
-            pokemonPicture.style.backgroundImage = `url(${imageUrl})`;
-
-            renderPokemonPage(pokemon);
+        //Event listener
+        pokemonCard.addEventListener("click", () => {
+            //Här kanske man anropar någon funktion.
+            //Kan till exempel stå renderPokemonPage(pokemon);
         })
     })
 }
@@ -122,113 +108,94 @@ function renderPokemonGrid(gen) {
 }
 
 renderPokemonGrid(null);
-// Detta är sebbes branch
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function renderPokemonPage(pokemon) {
-    pokemonNameLabel.textContent = pokemon.pokemonName;
-
-    const getCurrentGenNumber = currentGen.length === 1 ? currentGen.map(g => g.year + 1) : NaN; //Kollar först om vi valt en generation, då blir currentGen.length 1. Om vi inte valt någon generation visas alla vilket resulterar i att inget unikt number valts (därmed Not a Number)
-    pokemonGenLabel.textContent = getCurrentGenNumber ? `Generation ${getCurrentGenNumber}` : "All Generations";
-    /*   const currentCoachesId = currentGen.map(g => g.coaches.find(c => c.participantId === pokemon.id)).map(p => p.coachId);
-      console.log(currentCoachesId)
-      const coachNames = currentCoachesId.map(coach => coaches.find(c => c.id === coach)).map(c => c.name); */
-    const currentTrainersId = currentGen.map(g => g.trainers.find(t => t.participantId === pokemon.id)).filter(t => t != undefined).map(t => t.trainerId);
-    const trainerNames = currentTrainersId.map(trainer => trainers.find(t => t.id === trainer)).map(t => t.name);
-    const amountOfTrainers = trainerNames.length;
-    trainerNames.forEach(name => {
-        const div = document.createElement("div");
-        div.classList.add("label");
-        div.classList.add("trainer-label")
-        div.textContent = name;
-        pokemonLabelsContainer.append(div);
-    })
+//STARTSIDA
+//GYMSIDA
+
+let radarChartSvg = document.querySelector("#radarChartSvg");
+function renderGymPage(gym) {
+    console.log(gym)
+    startPage.classList.add("hide");
+    gymPage.classList.remove("hide");
+    createRadarChart(gym);
 }
+
+function createRadarChart(gym) {
+    //Loopar igenom skillfactors och pushar in value för varje skill i en ny array
+    let skillPoints = [];
+    for (let skill in gym.skillFactors) {
+        skillPoints.push(gym.skillFactors[skill]);
+    }
+    let dots = [];
+    //Mitt punkten av svg, den är 300 bred och hög.
+    let centerPoint = 150;
+    let numOfSkills = skillPoints.length
+    //2 * PI är 360 grader. Delar det på hur många skills som finns, i detta fall blir det 5.
+    let anglePerSkill = (2 * Math.PI) / numOfSkills;
+
+    //Ritar nätet bakom huvudpolygonen i olika storlekar.
+    drawBackgroundPolygon(25, numOfSkills, anglePerSkill, centerPoint);
+    drawBackgroundPolygon(50, numOfSkills, anglePerSkill, centerPoint);
+    drawBackgroundPolygon(75, numOfSkills, anglePerSkill, centerPoint);
+    drawBackgroundPolygon(100, numOfSkills, anglePerSkill, centerPoint);
+
+    skillPoints.forEach((skill, index) => {
+        //console.log(skill, index)
+        //Räknar ut vinkeln för denna punkt. - Math.PI / 2 gör så att första punkten börjar högst upp.
+        let angle = index * anglePerSkill - Math.PI / 2;
+        //x och y är kordinater för punkten. Skill * 5 skalar upp värdet så det är synligt men man hade
+        //kunnat skriva utan, men man hade knappt sett något.
+        //Math.cos och .sin omvandlar vinkeln till en riktning. .cos i x led och .sin i y led.
+        let x = centerPoint + Math.cos(angle) * skill * 5;
+        let y = centerPoint + Math.sin(angle) * skill * 5;
+        //x och y här är kordinater för texten. Jag multiplicerar inte med skill här för texten
+        //ska inte röra sig om det är ett specifikt värde, utan den ska alltid vara på samma plats. 
+        let textX = centerPoint + Math.cos(angle) * 120;
+        let textY = centerPoint + Math.sin(angle) * 120;
+        dots.push(`${x},${y}`);
+
+        d3.select(radarChartSvg)
+            .append("image")
+            .attr("href", "bilder/2233235_0c846.png")
+            .attr("x", x - 10)
+            .attr("y", y - 10)
+            .attr("height", 20)
+            .attr("width", 20)
+            .on("mouseover", () => {
+                console.log(skill);
+            })
+
+        d3.select(radarChartSvg)
+            .append("text")
+            .attr("x", textX)
+            .attr("y", textY)
+            .text(skills[index].name)
+            .attr("text-anchor", "middle")
+    })
+
+    d3.select(radarChartSvg)
+        .append("polygon")
+        .attr("points", dots.join(" "))
+        .attr("fill", "rgba(255, 0, 0, 0.1)")
+        .attr("stroke", "red")
+        .attr("stroke-width", 2)
+
+
+}
+
+function drawBackgroundPolygon(distance, numOfSkills, anglePerSkill, centerPoint) {
+    let backgroundDots = [];
+    for (let i = 0; i < numOfSkills; i++) {
+        let angle = i * anglePerSkill - Math.PI / 2;
+        let x = centerPoint + Math.cos(angle) * distance;
+        let y = centerPoint + Math.sin(angle) * distance;
+        backgroundDots.push(`${x}, ${y}`);
+    }
+    d3.select(radarChartSvg)
+        .append("polygon")
+        .attr("points", backgroundDots.join(" "))
+        .attr("fill", "none")
+        .attr("stroke", "lightgrey")
+        .attr("stroke-width", 1)
+}
+//GYMSIDA

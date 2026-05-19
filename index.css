@@ -73,12 +73,29 @@ border: 2px solid black;
 
 /* - GymPage - */
 #gymBanner {
-    background-color: #b3e0ff;
-    height: 75px;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 20px;
+    width: 100vw;
+    height: 20vh;
 }
 
+#gymStats {
+    display: flex;
+    gap: 20px;
+}
 
+#gymStatsRadarChart {
+    background: #ededed;
+}
+#gymStatsScoreBoard table thead th {
+    background-color: red;
+    color: white;
+}
+#gymStatsScatterPlot svg {
+    border: 1px solid black
+}
 
 
 

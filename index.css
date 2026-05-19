@@ -148,7 +148,7 @@ body {
     margin-right: 25px;
 }
 
-#pokemon-page-arrow-back {
+#pokemon-page-arrow-back, #gymBannerBack {
     background-image: url(icons/arrowback.svg);
     background-position: center;
     background-size: cover;

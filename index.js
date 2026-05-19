@@ -133,17 +133,9 @@ function renderPokemonGrid(gen) {
 renderPokemonGrid(null);
 
 //STARTSIDA
-//GYMSIDA
+//GYMSIDA -- rardar chart
 
 let radarChartSvg = document.querySelector("#radarChartSvg");
-function renderGymPage(gym) {
-    console.log(gym);
-    startPage.classList.add("hide");
-    gymPage.classList.remove("hide");
-    document.querySelector("#gymBannerTitle").textContent = gym.gymName;
-
-    createRadarChart(gym);
-}
 
 function createRadarChart(gym) {
     //Loopar igenom skillfactors och pushar in value för varje skill i en ny array

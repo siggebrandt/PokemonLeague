@@ -2,22 +2,48 @@ const gymBanner = document.getElementById("gymBanner")
 
 function renderGymPage(gym, gen) {
     document.getElementById("radarChartSvg").innerHTML = "";
-    console.log(gym);
     console.log(gen);
+    console.log(gym);
+    
 
     startPage.classList.add("hide");
     gymPage.classList.remove("hide");
 
-    document.querySelector("#gymBannerTitle").textContent = `${gym.gymName} - Gen ${gen}`;
+    if (gen.length == 1) {
+      document.querySelector("#gymBannerTitle").textContent = `${gym.gymName} - Generation ${Number(gen[0].year) + 1}`;
+    } else {
+      document.querySelector("#gymBannerTitle").textContent = `${gym.gymName} - All Generations`;
+    }
 
     gymBanner.style.backgroundColor = gym.color; 
 
     createRadarChart(gym);
-    gymScoreBoard(gym)
+    gymScoreBoard(gym, gen)
+    console.log("Competitions:", gen[0].competitionDays)
 }
 
-function gymScoreBoard () {
+function gymScoreCalculateFinalScore (gym, gen) {
+  let participantingPokemons = [];
+  gen[0].competitionDays.forEach((day) => {
+    day.events.forEach((discipline) => {
+      if(discipline.disciplineId == gym[0].id){
+        discipline.scores.forEach((participants) => {
+
+        })
+        return discipline;
+      }
+    })
+
+    
+  })
+}
+
+function gymScoreBoard (gym, gen) {
+  console.log(gen)
     // bygger hela scoreboarden
+
+    //gen.sort(function(a, b){return b - a})
+    
     document.getElementById("gymStatsScoreBoard").innerHTML = `
     <table>
   <thead>
@@ -30,49 +56,49 @@ function gymScoreBoard () {
   </thead>
   <tbody>
     <tr>
-      <th scope="row">Buzzcocks</th>
+      <th scope="row">1</th>
       <td>1976</td>
       <td>9</td>
       <td>1223</td>
     </tr>
     <tr>
-      <th scope="row">The Clash</th>
+      <th scope="row">2</th>
       <td>1976</td>
       <td>6</td>
       <td>1123</td>
     </tr>
     <tr>
-      <th scope="row">The Damned</th>
+      <th scope="row">3</th>
       <td>1976</td>
       <td>10</td>
       <td>1123</td>
     </tr>
     <tr>
-      <th scope="row">Sex Pistols</th>
+      <th scope="row">4</th>
       <td>1975</td>
       <td>1</td>
       <td>1123</td>
     </tr>
     <tr>
-      <th scope="row">Sham 69</th>
+      <th scope="row">5</th>
       <td>1976</td>
       <td>13</td>
       <td>1123</td>
     </tr>
     <tr>
-      <th scope="row">Siouxsie and the Banshees</th>
+      <th scope="row">6</th>
       <td>1976</td>
       <td>11</td>
       <td>1123</td>
     </tr>
     <tr>
-      <th scope="row">Stiff Little Fingers</th>
+      <th scope="row">7</th>
       <td>1977</td>
       <td>10</td>
       <td>1123</td>
     </tr>
     <tr>
-      <th scope="row">The Stranglers</th>
+      <th scope="row">8</th>
       <td>1974</td>
       <td>17</td>
       <td>1123</td>

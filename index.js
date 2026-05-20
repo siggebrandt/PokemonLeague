@@ -60,7 +60,7 @@ disciplines.forEach((gym) => {
 
     //Event listener
     gymCard.addEventListener("click", () => {
-        renderGymPage(gym)
+        renderGymPage(gym, currentGen)
         //Här kanske man anropar någon funktion.
         //Kan till exempel stå renderGymPage(gym);
     })

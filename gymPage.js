@@ -1,28 +1,16 @@
 const gymBanner = document.getElementById("gymBanner")
 
-function renderGymPage(gym) {
+function renderGymPage(gym, gen) {
     document.getElementById("radarChartSvg").innerHTML = "";
     console.log(gym);
+    console.log(gen);
 
     startPage.classList.add("hide");
     gymPage.classList.remove("hide");
-    document.querySelector("#gymBannerTitle").textContent = `${gym.gymName} - Gen 1`;
 
-    if (gym.gymName == "Fire gym") { 
-        gymBanner.style.backgroundColor = "red" 
-    } 
-    if (gym.gymName == "Water gym") {
-        gymBanner.style.backgroundColor = "blue";
-    }
-    if (gym.gymName == "Electricity gym") {
-        gymBanner.style.backgroundColor = "yellow";
-    }
-    if (gym.gymName == "Grass gym") {
-        gymBanner.style.backgroundColor = "green";
-    } 
-    if (gym.gymName == "Pshycic gym") {
-        gymBanner.style.backgroundColor = "purple";
-    }
+    document.querySelector("#gymBannerTitle").textContent = `${gym.gymName} - Gen ${gen}`;
+
+    gymBanner.style.backgroundColor = gym.color; 
 
     createRadarChart(gym);
     gymScoreBoard(gym)

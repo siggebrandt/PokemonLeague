@@ -6,6 +6,7 @@ let pokemonGrid = document.querySelector("#pokemonGrid");
 let gymCardContainer = document.querySelector("#gymCardContainer")
 let chosenGen = seasons[0];
 let gymPage = document.querySelector("#gymPage");
+let generationTitle = document.querySelector("#generationText")
 
 const pokemonPage = document.getElementById("pokemon-page");
 const pokemonPageArrowBack = document.getElementById("pokemon-page-arrow-back");
@@ -23,7 +24,18 @@ const pokemoPageScoreSvg = document.getElementById("pokemon-page-score-svg");
 
 numberOfSeason = seasons.length;
 let currentGen = seasons;
-
+let genNameArray = [
+    "Kanto",
+    "Johto",
+    "Hoenn",
+    "Sinnoh",
+    "Unova",
+    "Kalos",
+    "Alola",
+    "Galar",
+    "Paldea",
+    "Kitakami"
+];
 //STARTSIDA
 //Skapa navBar 
 seasons.forEach((generation, index) => {
@@ -36,6 +48,7 @@ seasons.forEach((generation, index) => {
         chosenGen = seasons[index];
         currentGen = [chosenGen];
         renderPokemonGrid(chosenGen);
+            generationTitle.textContent = `Generation ${generation.year + 1} - ${genNameArray[index]}`
     })
     //console.log(generation, index)
 })

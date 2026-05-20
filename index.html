@@ -4,8 +4,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document</title>
+  <title>Pokemon Tournament</title>
   <link rel="stylesheet" href="index.css" />
+  <link rel="stylesheet" href="gymPage.css" />
+
 </head>
 
 <body>
@@ -26,14 +28,22 @@
       <p id="gymBannerTitle"></p>
       <div id="gymBannerStats"></div>
       </div>
+
     <div id="gymStats">
-      <div id="gymStatsScoreBoard"></div>
-      <div id="gymStatsScatterPlot">
-        <svg></svg>
+      <div id="gymStatsLeft">
+        <div id="gymStatsScoreBoard"></div>
+        <div id="gymStatsScatterPlot">
+          <svg id="scatterPlotSvg" height="450" width="400px"></svg>
+        </div>
       </div>
-      <div id="gymStatsRadarChart">
-        <svg id="radarChartSvg" height="300" width="300"></svg>
+
+      <div id="gymStatsRight">
+        <div id="gymStatsRadarChart">
+          <svg id="radarChartSvg" height="300" width="300"></svg>
+        </div>
+        <div id="gymStatsBarChart"></div>
       </div>
+
     </div>
   </div>
 

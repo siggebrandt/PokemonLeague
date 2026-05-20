@@ -472,6 +472,19 @@ function renderPokemonPage(pokemon) {
         svgData.push(dataObject);
     };
 
+    const scoreAndDateData = [];
+    const g = currentGen.filter(gen => gen.competitionDays.forEach(day => {
+        const scoreAndDate = { date: `${day.date.day}/${day.date.month}` };
+        day.events.forEach(event => {
+            event.scores.forEach(score => {
+                if (score.participantId === pokemon.id) {
+                    scoreAndDate.score = score.score;
+                    scoreAndDateData.push(scoreAndDate);
+                }
+            })
+        })
+    }));
+
     const width = 1200;
     const height = 400;
     const margin = 40;
@@ -482,37 +495,63 @@ function renderPokemonPage(pokemon) {
         .attr("width", width)
         .attr("height", height);
 
-    const xScale = d3.scaleLinear()
-        .domain(d3.extent(svgData, data => data.x))
+    const xScale = d3.scaleBand()
+        .domain(d3.map(scoreAndDateData, data => data.date))
         .range([margin, width - margin]);
 
     const yScale = d3.scaleLinear()
-        .domain([d3.min(svgData, data => data.y) - 50, d3.max(svgData, data => data.y) + 50])
+        .domain([d3.min(scoreAndDateData, data => data.score) - 50, d3.max(scoreAndDateData, data => data.score) + 50])
         .range([height - margin, margin]);
 
     const line = d3.line()
-        .x(data => xScale(data.x))
-        .y(data => yScale(data.y));
+        .x(data => xScale(data.date) + xScale.bandwidth() / 2)
+        .y(data => yScale(data.score));
 
     svg.append("path")
-        .datum(svgData)
+        .datum(scoreAndDateData)
         .attr("fill", "none")
         .attr("stroke", "black")
         .attr("d", line);
 
+    const tooltip = d3.select("body")
+        .append("div")
+        .style("position", "absolute")
+        .style("background", "white")
+        .style("padding", "5px")
+        .style("border", "1px solid black")
+        .style("display", "none");
+
     svg.selectAll("image")
-        .data(svgData)
+        .data(scoreAndDateData.filter((d, i) => i % 10 === 0))
         .enter()
         .append("image")
         .attr("href", "bilder/2233235_0c846.png")
-        .attr("x", d => xScale(d.x) - 15)
-        .attr("y", d => yScale(d.y) - 15)
+        .attr("x", d => xScale(d.date) + xScale.bandwidth() / 2 - 15)
+        .attr("y", d => yScale(d.score) - 15)
         .attr("width", 30)
-        .attr("height", 30);
+        .attr("height", 30)
+        .on("mouseover", function (event, d) {
+            tooltip
+                .style("display", "block")
+                .html(`Score: ${d.score}`);
+        })
+        .on("mousemove", function (event) {
+            tooltip
+                .style("left", event.pageX + 10 + "px")
+                .style("top", event.pageY + 10 + "px");
+        })
+        .on("mouseout", function () {
+            tooltip.style("display", "none");
+        });
+
+    const xAxis = d3.axisBottom(xScale)
+        .tickValues(
+            xScale.domain().filter((d, i) => i % 10 === 0)
+        );
 
     svg.append("g")
         .attr("transform", `translate(0, ${height - margin})`)
-        .call(d3.axisBottom(xScale));
+        .call(xAxis);
 
     svg.append("g")
         .attr("transform", `translate(${margin}, 0)`)

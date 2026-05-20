@@ -27,7 +27,8 @@ function gymScoreCalculateFinalScore (gym, gen) {
   gen[0].competitionDays.forEach((day) => {
     day.events.forEach((discipline) => {
       if(discipline.disciplineId == gym[0].id){
-        discipline.scores.forEach((participants) => {
+        discipline.scores.forEach((participant) => {
+          //participant
 
         })
         return discipline;

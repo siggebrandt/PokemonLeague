@@ -10,7 +10,7 @@ function renderGymPage(gym, gen) {
     gymPage.classList.remove("hide");
 
     if (gen.length == 1) {
-      document.querySelector("#gymBannerTitle").textContent = `${gym.gymName} - Generation ${Number(gen[0].year) + 1}`;
+      document.querySelector("#gymBannerTitle").textContent = `${gym.gymName} - Generation ${Number(gen.year) + 1}`;
     } else {
       document.querySelector("#gymBannerTitle").textContent = `${gym.gymName} - All Generations`;
     }
@@ -19,24 +19,38 @@ function renderGymPage(gym, gen) {
 
     createRadarChart(gym);
     gymScoreBoard(gym, gen)
-    console.log("Competitions:", gen[0].competitionDays)
+    //console.log("Competitions:", gen.competitionDays)
+
+    gymScoreCalculateFinalScore(gym, gen)
 }
 
-function gymScoreCalculateFinalScore (gym, gen) {
-  let participantingPokemons = [];
-  gen[0].competitionDays.forEach((day) => {
-    day.events.forEach((discipline) => {
-      if(discipline.disciplineId == gym[0].id){
-        discipline.scores.forEach((participant) => {
-          //participant
+/*********  A N V Ä N D A   D E N N A F U N K T I O N       F Ö R     A T T      F Y L L A       T A B E L L E N */
 
+function gymScoreCalculateFinalScore (gym, gen) {
+  let participatingPokemons = [];
+  gen.competitionDays.forEach((day) => {
+    day.events.forEach((discipline) => {
+      if(discipline.disciplineId == gym.id){
+        discipline.scores.forEach((participant) => {
+
+          const index = participatingPokemons.findIndex((pokemon) =>  {
+            return pokemon.id == participant.participantId 
+          });
+
+          if (index === -1) {
+            participatingPokemons.push({
+              id: participant.participantId,
+              totalScore: participant.score
+            });
+          } else {
+            participatingPokemons[index].totalScore += participant.score;
+          }
         })
-        return discipline;
       }
     })
-
-    
   })
+  console.log(participatingPokemons);
+  return participatingPokemons;
 }
 
 function gymScoreBoard (gym, gen) {
@@ -107,6 +121,8 @@ function gymScoreBoard (gym, gen) {
   </tbody>
 </table>
     `
+
+    document.getElementById("gymStatsScoreBoard").innerHTML += gymScoreCalculateFinalScore(gym, gen);
 }
 
 document.querySelector("#gymBannerBack").addEventListener("click", function () {

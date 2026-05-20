@@ -43,6 +43,8 @@ seasons.forEach((generation, index) => {
     let genButton = document.createElement("button");
     genButton.textContent = `Gen ${generation.year + 1}`
     navBar.appendChild(genButton)
+    
+
 
     genButton.addEventListener("click", () => {
         chosenGen = seasons[index];
@@ -73,7 +75,7 @@ disciplines.forEach((gym) => {
 
     //Event listener
     gymCard.addEventListener("click", () => {
-        renderGymPage(gym, currentGen)
+        renderGymPage(gym, currentGen[0])
         //Här kanske man anropar någon funktion.
         //Kan till exempel stå renderGymPage(gym);
     })

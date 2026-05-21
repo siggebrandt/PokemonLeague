@@ -416,14 +416,21 @@ function renderPokemonPage(pokemon) {
 
     const currentTrainersId = currentGen.map(gen => gen.trainers.find(trainer => trainer.participantId === pokemon.id)).filter(trainer => trainer != undefined).map(trainer => trainer.trainerId);
     const trainerNames = currentTrainersId.map(trainer => trainers.find(t => t.id === trainer)).map(trainer => trainer.name);
+    const trainerDisciplineId = currentTrainersId.map(trainer => trainers.find(t => t.id === trainer)).map(trainer => trainer.disciplineId);
+    const disciplineNames = trainerDisciplineId.map(trainer => disciplines.find(discipline => discipline.id === trainer)).map(discipline => discipline.name);
 
-    trainerNames.forEach(name => {
-        const div = document.createElement("div");
-        div.classList.add("label");
-        div.classList.add("trainer-label")
-        div.textContent = name;
-        pokemonLabelsContainer.append(div);
-    });
+    for (let i = 0; i < trainerNames.length; i++) {
+        const trainerNameDiv = document.createElement("div");
+        const disciplineNameDiv = document.createElement("div");
+        trainerNameDiv.classList.add("label");
+        disciplineNameDiv.classList.add("label");
+        trainerNameDiv.classList.add("trainer-label");
+        disciplineNameDiv.classList.add("trainer-label");
+        trainerNameDiv.textContent = trainerNames[i];
+        disciplineNameDiv.textContent = disciplineNames[i];
+        pokemonLabelsContainer.append(trainerNameDiv);
+        pokemonLabelsContainer.append(disciplineNameDiv);
+    };
 
 
     // Fyller i poäng och placering på höger sida av navbaren.

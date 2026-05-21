@@ -16,15 +16,16 @@ function renderGymPage(gym, gen) {
 
     createRadarChart(gym);
     createSkillList(gym);
-    gymScoreBoard(gym, gen)
+    let pokemonsInGymAndGen = gymScoreCalculateFinalScore(gym, gen);
+    gymScoreBoard(pokemonsInGymAndGen)
+
+
     //console.log("Competitions:", gen.competitionDays)
 
     //gymScoreCalculateFinalScore(gym, gen)
 }
 
 function renderGymPageGenStats (gen) {
-
-
 }
 
 /*********  A N V Ä N D A   D E N N A F U N K T I O N       F Ö R     A T T      F Y L L A       T A B E L L E N */
@@ -52,80 +53,105 @@ function gymScoreCalculateFinalScore (gym, gen) {
       }
     })
   })
+  participatingPokemons.sort((a, b) => {
+  return b.totalScore - a.totalScore
+  })
   console.log("PARTICIPATING POKEMONS:", participatingPokemons);
   return participatingPokemons;
 }
 
-function gymScoreBoard (gym, gen) {
-    // bygger hela scoreboarden
-    // #gymStatsScoreBoard table tbody
+function pokemonIdToName(pokemonId) {
+  const foundPokemon =  participants.find((pokemon) => {
+    return pokemon.id == pokemonId;
+  })
+  return foundPokemon.pokemonName;
+}
 
-    //gen.sort(function(a, b){return b - a})
+function pokemonsTrainerforGen (pokemon, gen) {
+  gen.trainers.forEach((trainer) => { 
+    //trainers hitta o jämföra participant id & trainerID
+  })
+
+  // 
+}
+
+function gymScoreBoard (participatingPokemons) {
+    // bygger hela scoreboarden
+    const tableBody = document.querySelector("#gymStatsScoreBoard table tbody");
+
+    let tableIndex = 1;
+
+    participatingPokemons.forEach((pokemon) => {
+      const tableRow = document.createElement("tr");
+      tableRow.textContent = tableIndex;
+      tableIndex++;
+      tableBody.appendChild(tableRow);
+
+      const tableDataPokemon = document.createElement("td");
+      tableDataPokemon.textContent = pokemonIdToName(pokemon.id);
+      const tableDataTrainer = document.createElement("td");
+      tableDataTrainer.textContent = "trainer"
+      tableDataTrainer.style.textAlign = "center"
+      const tableDataScore = document.createElement("td");
+      tableDataScore.textContent = pokemon.totalScore;
+      tableDataScore.style.textAlign = "right"
+      tableRow.append(tableDataPokemon, tableDataTrainer, tableDataScore);
+      
+      /* const row = document.createElement("tr"); */
+
+    });
     
-    document.getElementById("gymStatsScoreBoard").innerHTML = `
-    <table>
-  <thead>
+    /* document.querySelector("#gymStatsScoreBoard table tbody").innerHTML = `
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">pokemon</th>
-      <th scope="col">trainer</th>
-      <th scope="col">final score</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
+      <th>1</th>
       <td>1976</td>
       <td>9</td>
       <td>1223</td>
     </tr>
     <tr>
-      <th scope="row">2</th>
+      <th>2</th>
       <td>1976</td>
       <td>6</td>
       <td>1123</td>
     </tr>
     <tr>
-      <th scope="row">3</th>
+      <th>3</th>
       <td>1976</td>
       <td>10</td>
       <td>1123</td>
     </tr>
     <tr>
-      <th scope="row">4</th>
+      <th>4</th>
       <td>1975</td>
       <td>1</td>
       <td>1123</td>
     </tr>
     <tr>
-      <th scope="row">5</th>
+      <th>5</th>
       <td>1976</td>
       <td>13</td>
       <td>1123</td>
     </tr>
     <tr>
-      <th scope="row">6</th>
+      <th>6</th>
       <td>1976</td>
       <td>11</td>
       <td>1123</td>
     </tr>
     <tr>
-      <th scope="row">7</th>
+      <th>7</th>
       <td>1977</td>
       <td>10</td>
       <td>1123</td>
     </tr>
     <tr>
-      <th scope="row">8</th>
+      <th>8</th>
       <td>1974</td>
       <td>17</td>
       <td>1123</td>
     </tr>
-  </tbody>
-</table>
-    `
-
-    document.getElementById("gymStatsScoreBoard").innerHTML += gymScoreCalculateFinalScore(gym, gen);
+    ` */
+    //document.getElementById("gymStatsScoreBoard").innerHTML += gymScoreCalculateFinalScore(gym, gen);
 }
 
 document.querySelector("#gymBannerBack").addEventListener("click", function () {

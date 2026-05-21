@@ -22,8 +22,10 @@
 
 /* Score Board */
 #gymStatsScoreBoard {
-    height: 450px;
+    height: 350px;
+    width: 650px;
     overflow: scroll;
+    font-size: 22px;
 }
 
 
@@ -35,6 +37,9 @@ table {
 #gymStatsScoreBoard table thead  th {
     background-color: red;
     color: white;
+}
+tr:nth-of-type(even) {
+    background-color: #eeeeee;
 }
 
 /* Scatter Plot */
@@ -53,4 +58,3 @@ table {
 #gymStatsRadarChart {
     background: white;
 }
-

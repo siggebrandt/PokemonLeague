@@ -18,6 +18,7 @@ function renderGymPage(gym, gen) {
     gymBanner.style.backgroundColor = gym.color; 
 
     createRadarChart(gym);
+    createSkillList(gym);
     gymScoreBoard(gym, gen)
     console.log("Competitions:", gen[0].competitionDays)
 }

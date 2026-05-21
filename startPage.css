@@ -68,7 +68,8 @@
 }
 
 .gymCards {
-    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
     cursor: pointer;
     width: 250px;
 }
@@ -76,6 +77,7 @@
 .gymImages {
     width: 100%;
     object-fit: cover;
+    border-radius: 10px 10px 0 0;
 }
 
 .gymNames {
@@ -84,7 +86,7 @@
     font-weight: bold;
     text-align: center;
     color: white;
-    margin-top: -6px;
+    border-radius: 0 0 10px 10px;
 }
 
 #radarChartHoverDiv {

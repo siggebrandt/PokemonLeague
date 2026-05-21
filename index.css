@@ -89,7 +89,6 @@ body {
     align-items: center;
     width: 100vw;
     height: 20vh;
-    background-color: #f5f4ed;
 }
 
 #header-contents-left,
@@ -153,11 +152,6 @@ body {
     background-color: white;
     border: 1px solid black;
     box-sizing: border-box;
-}
-
-.trainer-label {
-    background-color: #ffe5cc;
-    color: #f28212;
 }
 
 .pokemon-points-and-placement {

@@ -37,6 +37,7 @@ seasons.forEach((generation, index) => {
         currentGen = [chosenGen];
         console.log(currentGen, "hej")
         renderPokemonGrid(chosenGen);
+        renderGymPageGenStats(chosenGen);
             generationTitle.textContent = `Generation ${generation.year + 1} - ${genNameArray[index]}`;
             pokemonSmallTitle.textContent = `Participating Pokemons - gen ${generation.year + 1}`;
     })

@@ -2,19 +2,16 @@ const gymBanner = document.getElementById("gymBanner")
 
 function renderGymPage(gym, gen) {
     document.getElementById("radarChartSvg").innerHTML = "";
-    console.log(gen);
-    console.log(gym);
+    document.getElementById("radarChartSkillDisplay").innerHTML = "";
+    console.log("GEN", gen);
+    console.log("GYM", gym);
     
 
     startPage.classList.add("hide");
     gymPage.classList.remove("hide");
 
-    if (gen.length == 1) {
-      document.querySelector("#gymBannerTitle").textContent = `${gym.gymName} - Generation ${Number(gen.year) + 1}`;
-    } else {
-      document.querySelector("#gymBannerTitle").textContent = `${gym.gymName} - All Generations`;
-    }
-
+    document.querySelector("#gymBannerTitle").textContent = `${gym.gymName} - Generation ${Number(gen.year) + 1}`;
+    
     gymBanner.style.backgroundColor = gym.color; 
 
     createRadarChart(gym);
@@ -22,7 +19,12 @@ function renderGymPage(gym, gen) {
     gymScoreBoard(gym, gen)
     //console.log("Competitions:", gen.competitionDays)
 
-    gymScoreCalculateFinalScore(gym, gen)
+    //gymScoreCalculateFinalScore(gym, gen)
+}
+
+function renderGymPageGenStats (gen) {
+
+
 }
 
 /*********  A N V Ä N D A   D E N N A F U N K T I O N       F Ö R     A T T      F Y L L A       T A B E L L E N */
@@ -50,13 +52,13 @@ function gymScoreCalculateFinalScore (gym, gen) {
       }
     })
   })
-  console.log(participatingPokemons);
+  console.log("PARTICIPATING POKEMONS:", participatingPokemons);
   return participatingPokemons;
 }
 
 function gymScoreBoard (gym, gen) {
-  console.log(gen)
     // bygger hela scoreboarden
+    // #gymStatsScoreBoard table tbody
 
     //gen.sort(function(a, b){return b - a})
     

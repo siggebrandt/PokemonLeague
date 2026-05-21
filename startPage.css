@@ -1,0 +1,129 @@
+#startPage {
+    background-image: url(bilder/feeling_the_alolan_nature_by_phyromatical_dcj41y1-414w-2x.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#whiteFilter {
+    background-color:rgba(255, 255, 255, 0.70);
+}
+
+#startPageContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 100px;
+}
+
+#startPageTextContainer {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    text-align: center;
+    gap: 15px;
+}
+
+#startPageTitle {
+    font-size: 70px;
+}
+
+#generationText {
+    font-size: 25px;
+}
+
+#pokemonGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 16px;
+    padding: 16px;
+}
+
+.pokemonCard {
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    width: 130px;
+    display: flex;
+    flex-direction: column;
+}
+
+.pokemonCardImage {
+    width: 100%;
+    object-fit: contain;
+    background-color: #e8f4e8;
+}
+
+.pokemonName {
+    text-align: center;
+    padding: 15px 0;
+    background-color: white;
+    font-size: 18px;
+    margin: 0px;
+}
+
+#gymCardContainer {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.gymCards {
+    border-radius: 8px;
+    cursor: pointer;
+    width: 250px;
+}
+
+.gymImages {
+    width: 100%;
+    object-fit: cover;
+}
+
+.gymNames {
+    padding: 25px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    margin-top: -6px;
+}
+
+#radarChartHoverDiv {
+    display: none;
+    position: fixed;
+    padding: 8px;
+}
+
+#radarChartSkillDisplay {
+    display: flex;
+    flex-direction: column;
+}
+
+.skillRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.leftSkill {
+    display: flex;
+    align-items: center;
+
+}
+
+.leftImage {
+    width: 30px;
+    height: 30px;
+} 
+
+.rightSkill {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.rightBar {
+    width: 150px;
+    height: 8px;
+    background: lightgrey;
+    border-radius: 4px;
+  }

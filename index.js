@@ -131,6 +131,7 @@ function drawBackgroundPolygon(distance, numOfSkills, anglePerSkill, centerPoint
 }
 
 function createSkillList(gym) {
+    radarChartSkillDisplay.innerHTML = ``
     let skillPoints = [];
     console.log(gym.skillFactors)
     for(let skill in gym.skillFactors) {
@@ -138,6 +139,7 @@ function createSkillList(gym) {
     }
 
     skills.forEach((skill, index) => {
+
         //skapar element
         let skillRow = document.createElement("div");
         let leftSkill = document.createElement("div");

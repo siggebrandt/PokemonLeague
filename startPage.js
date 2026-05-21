@@ -7,6 +7,7 @@ let gymCardContainer = document.querySelector("#gymCardContainer")
 let chosenGen = seasons[0];
 let gymPage = document.querySelector("#gymPage");
 let generationTitle = document.querySelector("#generationText")
+let pokemonSmallTitle = document.querySelector("#pokemonSmallTitle")
 
 numberOfSeason = seasons.length;
 let currentGen = seasons;
@@ -36,7 +37,8 @@ seasons.forEach((generation, index) => {
         currentGen = [chosenGen];
         console.log(currentGen, "hej")
         renderPokemonGrid(chosenGen);
-            generationTitle.textContent = `Generation ${generation.year + 1} - ${genNameArray[index]}`
+            generationTitle.textContent = `Generation ${generation.year + 1} - ${genNameArray[index]}`;
+            pokemonSmallTitle.textContent = `Participating Pokemons - gen ${generation.year + 1}`;
     })
     //console.log(generation, index)
 })

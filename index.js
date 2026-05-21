@@ -9,6 +9,7 @@ let gymPage = document.querySelector("#gymPage");
 let generationTitle = document.querySelector("#generationText")
 
 const pokemonPage = document.getElementById("pokemon-page");
+const pokemonPageHeader = document.getElementById("pokemon-page-header");
 const pokemonPageArrowBack = document.getElementById("pokemon-page-arrow-back");
 const pokemonPicture = document.getElementById("pokemon-picture");
 const pokemonLabelsContainer = document.getElementById("labels-container");
@@ -20,7 +21,7 @@ const pokemonTopScore = document.getElementById("pokemon-top-score");
 const pokemonTotalScore = document.getElementById("pokemon-total-score");
 const pokemonTopPlacement = document.getElementById("pokemon-top-placement");
 const mainPokemonPage = document.getElementById("pokemon-page-main");
-const pokemoPageScoreSvg = document.getElementById("pokemon-page-score-svg");
+const pokemonPageScoreSvg = document.getElementById("pokemon-page-score-svg");
 
 numberOfSeason = seasons.length;
 let currentGen = seasons;
@@ -487,6 +488,8 @@ function createSkillList(gym) {
 
 function renderPokemonPage(pokemon) {
     // Fyller i generation och tränare på vänster sida av navbaren.
+
+pokemonPageHeader.style.backgroundColor = pokemon.colors[0];
     pokemonNameLabel.textContent = pokemon.pokemonName;
 
     //Kollar först om vi valt en generation, då blir currentGen.length 1. Om vi inte valt någon generation visas alla (ALL == NaN).
@@ -507,8 +510,10 @@ function renderPokemonPage(pokemon) {
         const disciplineNameDiv = document.createElement("div");
         trainerNameDiv.classList.add("label");
         disciplineNameDiv.classList.add("label");
-        trainerNameDiv.classList.add("trainer-label");
-        disciplineNameDiv.classList.add("trainer-label");
+        trainerNameDiv.style.backgroundColor = pokemon.colors[1];
+        trainerNameDiv.style.color = pokemon.colors[2];
+        disciplineNameDiv.style.backgroundColor = pokemon.colors[1];
+        disciplineNameDiv.style.color = pokemon.colors[2];
         trainerNameDiv.textContent = trainerNames[i];
         disciplineNameDiv.textContent = disciplineNames[i];
         pokemonLabelsContainer.append(trainerNameDiv);
@@ -554,7 +559,7 @@ function renderPokemonPage(pokemon) {
 
 
     // Skapar svg
-    pokemoPageScoreSvg.textContent = "";
+    pokemonPageScoreSvg.textContent = "";
 
     const svgData = [];
     for (let i = 0; i < scores.length; i++) {

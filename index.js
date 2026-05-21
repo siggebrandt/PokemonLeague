@@ -14,6 +14,9 @@ const pokemonTotalScore = document.getElementById("pokemon-total-score");
 const pokemonTopPlacement = document.getElementById("pokemon-top-placement");
 const mainPokemonPage = document.getElementById("pokemon-page-main");
 const pokemonPageScoreSvg = document.getElementById("pokemon-page-score-svg");
+const pokemonPageTable = document.getElementById("pokemon-page-table");
+const pokemonPageTableLabels = document.getElementById("table-labels");
+const tablePlacementLabel = document.getElementById("placement-label");
 
 //STARTSIDA
 //GYMSIDA -- rardar chart
@@ -366,6 +369,11 @@ function createSkillList(gym) {
 
 function renderPokemonPage(pokemon) {
     // Fyller i generation och tränare på vänster sida av navbaren.
+    pokemonPageArrowBack.addEventListener("click", function () {
+    body.classList.remove("pokemon-page-background");
+    pokemonPage.classList.add("hide");
+    startPage.classList.remove("hide");
+});
 
 pokemonPageHeader.style.backgroundColor = pokemon.colors[0];
     pokemonNameLabel.textContent = pokemon.pokemonName;
@@ -458,7 +466,7 @@ pokemonPageHeader.style.backgroundColor = pokemon.colors[0];
         })
     }));
 
-    const width = 1200;
+    const width = 600;
     const height = 400;
     const margin = 40;
 
@@ -537,10 +545,20 @@ pokemonPageHeader.style.backgroundColor = pokemon.colors[0];
         .style("font-size", "24px")
         .style("font-weight", "bold")
         .text("Score over time");
-}
 
-pokemonPageArrowBack.addEventListener("click", function () {
-    body.classList.remove("pokemon-page-background");
-    pokemonPage.classList.add("hide");
-    startPage.classList.remove("hide");
-})
+
+    //Fyller i tabellen
+    pokemonPageTableLabels.style.backgroundColor = pokemon.colors[0];
+
+    for (let i = 0; i < scoreAndDateData.length; i++) {
+const tableRow = document.createElement("div");
+tableRow.classList.add("table-row");
+
+        const placementDiv = document.createElement("div");
+        placementDiv.textContent = allPlacements[i];
+
+        tableRow.append(placementDiv);
+
+        pokemonPageTable.append(tableRow);
+    }
+};

@@ -17,13 +17,18 @@ body{
 }
 
 #navBar {
-    width: max-content;
     margin: 20px;
     display: flex;
+    position: fixed;
+    top: 90%;
+    right: 0;
+    left: 0;
+    z-index: 10;
+    justify-content: center;
 }
 
 #navBar button {
-padding: 15px;
+padding: 20px;
 cursor: pointer;
 }
 
@@ -119,6 +124,47 @@ cursor: pointer;
     color: white;
     margin-top: -6px;
 }
+
+#radarChartHoverDiv {
+    display: none;
+    position: fixed;
+    padding: 8px;
+}
+
+#radarChartSkillDisplay {
+    display: flex;
+    flex-direction: column;
+}
+
+.skillRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.leftSkill {
+    display: flex;
+    align-items: center;
+
+}
+
+.leftImage {
+    width: 30px;
+    height: 30px;
+} 
+
+.rightSkill {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.rightBar {
+    width: 150px;
+    height: 8px;
+    background: lightgrey;
+    border-radius: 4px;
+  }
 
 
 

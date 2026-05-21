@@ -42,13 +42,13 @@ seasons.forEach((generation, index) => {
     //Loopar igenom alla säsonger och bygger själva knappen. Använder forEach så att jag kan använda index.
     let genButton = document.createElement("button");
     genButton.textContent = `Gen ${generation.year + 1}`
-    navBar.appendChild(genButton)
-    
+        navBar.appendChild(genButton)
 
 
     genButton.addEventListener("click", () => {
         chosenGen = seasons[index];
         currentGen = [chosenGen];
+        console.log(currentGen, "hej")
         renderPokemonGrid(chosenGen);
             generationTitle.textContent = `Generation ${generation.year + 1} - ${genNameArray[index]}`
     })
@@ -151,6 +151,8 @@ renderPokemonGrid(null);
 //GYMSIDA -- rardar chart
 
 let radarChartSvg = document.querySelector("#radarChartSvg");
+let radarChartHoverDiv = document.querySelector("#radarChartHoverDiv");
+let radarChartSkillDisplay = document.querySelector("#radarChartSkillDisplay");
 
 function createRadarChart(gym) {
     //Loopar igenom skillfactors och pushar in value för varje skill i en ny array
@@ -159,17 +161,22 @@ function createRadarChart(gym) {
         skillPoints.push(gym.skillFactors[skill]);
     }
     let dots = [];
-    //Mitt punkten av svg, den är 300 bred och hög.
-    let centerPoint = 150;
+    //Mitt punkten av svg, den är 400 bred och hög.
+    let centerPoint = 200;
     let numOfSkills = skillPoints.length
     //2 * PI är 360 grader. Delar det på hur många skills som finns, i detta fall blir det 5.
     let anglePerSkill = (2 * Math.PI) / numOfSkills;
 
+    //Variable som jag ändrar beroende på hur stort jag vill att svg ska vara
+    let scale = 7.5;
+    //Sätter en maxRadius för att max skill är 21 så den får inte vara större eller mindre än det.
+    let maxRadius = 21 * scale;
+
     //Ritar nätet bakom huvudpolygonen i olika storlekar.
-    drawBackgroundPolygon(25, numOfSkills, anglePerSkill, centerPoint);
-    drawBackgroundPolygon(50, numOfSkills, anglePerSkill, centerPoint);
-    drawBackgroundPolygon(75, numOfSkills, anglePerSkill, centerPoint);
-    drawBackgroundPolygon(100, numOfSkills, anglePerSkill, centerPoint);
+    drawBackgroundPolygon(maxRadius * 0.25, numOfSkills, anglePerSkill, centerPoint);
+    drawBackgroundPolygon(maxRadius * 0.50, numOfSkills, anglePerSkill, centerPoint);
+    drawBackgroundPolygon(maxRadius * 0.75, numOfSkills, anglePerSkill, centerPoint);
+    drawBackgroundPolygon(maxRadius, numOfSkills, anglePerSkill, centerPoint);
 
     skillPoints.forEach((skill, index) => {
         //console.log(skill, index)
@@ -178,23 +185,39 @@ function createRadarChart(gym) {
         //x och y är kordinater för punkten. Skill * 5 skalar upp värdet så det är synligt men man hade
         //kunnat skriva utan, men man hade knappt sett något.
         //Math.cos och .sin omvandlar vinkeln till en riktning. .cos i x led och .sin i y led.
-        let x = centerPoint + Math.cos(angle) * skill * 5;
-        let y = centerPoint + Math.sin(angle) * skill * 5;
+        let x = centerPoint + Math.cos(angle) * skill * scale;
+        let y = centerPoint + Math.sin(angle) * skill * scale;
         //x och y här är kordinater för texten. Jag multiplicerar inte med skill här för texten
         //ska inte röra sig om det är ett specifikt värde, utan den ska alltid vara på samma plats. 
-        let textX = centerPoint + Math.cos(angle) * 120;
-        let textY = centerPoint + Math.sin(angle) * 120;
+        let textX = centerPoint + Math.cos(angle) * (maxRadius + 15);
+        let textY = centerPoint + Math.sin(angle) * (maxRadius + 15);
         dots.push(`${x},${y}`);
 
         d3.select(radarChartSvg)
             .append("image")
             .attr("href", "bilder/2233235_0c846.png")
-            .attr("x", x - 10)
-            .attr("y", y - 10)
-            .attr("height", 20)
-            .attr("width", 20)
-            .on("mouseover", () => {
-                console.log(skill);
+            .attr("x", x - 17.5)
+            .attr("y", y - 17.5)
+            .attr("height", 35)
+            .attr("width", 35)
+            .on("mouseover", (event) => {
+                radarChartHoverDiv.style.display = "block";
+                radarChartHoverDiv.style.backgroundColor = gym.color
+                radarChartHoverDiv.style.left = event.clientX + "px";
+                radarChartHoverDiv.style.top = event.clientY + "px";
+                radarChartHoverDiv.innerHTML = `
+                <p>${skills[index].fullName}</p>
+                <div style="display:flex">
+                <img src="bilder/2233235_0c846.png" width="20" height="20"></img> <p>${skill}</p>
+                </div>
+                `;
+            })
+            .on("mousemove", (event) => {
+                radarChartHoverDiv.style.left = event.clientX + "px";
+                radarChartHoverDiv.style.top = event.clientY + "px"
+            })
+            .on("mouseout", (event) => {
+                radarChartHoverDiv.style.display = "none"
             })
 
         d3.select(radarChartSvg)
@@ -204,12 +227,12 @@ function createRadarChart(gym) {
             .text(skills[index].name)
             .attr("text-anchor", "middle")
     })
-
     d3.select(radarChartSvg)
         .append("polygon")
         .attr("points", dots.join(" "))
-        .attr("fill", "rgba(255, 0, 0, 0.1)")
-        .attr("stroke", "red")
+        .attr("fill", `${gym.color}`)
+        .attr("fill-opacity", 0.1)
+        .attr("stroke", `${gym.color}`)
         .attr("stroke-width", 2)
 
 
@@ -230,6 +253,57 @@ function drawBackgroundPolygon(distance, numOfSkills, anglePerSkill, centerPoint
         .attr("stroke", "lightgrey")
         .attr("stroke-width", 1)
 }
+
+function createSkillList(gym) {
+    let skillPoints = [];
+    console.log(gym.skillFactors)
+    for(let skill in gym.skillFactors) {
+        skillPoints.push(gym.skillFactors[skill])
+    }
+
+    skills.forEach((skill, index) => {
+        //skapar element
+        let skillRow = document.createElement("div");
+        let leftSkill = document.createElement("div");
+        let leftImage = document.createElement("img");
+        let leftText = document.createElement("p");
+        let rightSkill = document.createElement("div");
+        let rightBar = document.createElement("div");
+        let innerBar = document.createElement("div");
+        let rightValue = document.createElement("p");
+
+        //Appendar element
+        radarChartSkillDisplay.appendChild(skillRow);
+        skillRow.appendChild(leftSkill);
+        skillRow.appendChild(rightSkill);
+        leftSkill.appendChild(leftImage);
+        leftSkill.appendChild(leftText);
+        rightSkill.appendChild(rightBar);
+        rightBar.appendChild(innerBar);
+        rightSkill.appendChild(rightValue);
+
+        //Ger klasser
+        skillRow.classList.add("skillRow");
+        leftSkill.classList.add("leftSkill");
+        leftImage.classList.add("leftImage");
+        leftText.classList.add("leftText");
+        rightSkill.classList.add("rightSkill");
+        rightBar.classList.add("rightBar");
+        innerBar.classList.add("innerBar");
+        rightValue.classList.add("rightValue");
+
+        //elementens innehåll
+        leftImage.src = "bilder/2233235_0c846.png";
+        leftText.textContent = `${skill.fullName}`;
+        innerBar.style.width = `${(skillPoints[index] / 21) * 100}%`;
+        innerBar.style.height = "100%";
+        innerBar.style.backgroundColor = gym.color;
+        innerBar.style.borderRadius = "4px"
+        rightValue.textContent = `${skillPoints[index]}`;
+    })
+}
+
+
 //GYMSIDA
 
 

@@ -397,14 +397,18 @@ pokemonPageHeader.style.backgroundColor = pokemon.colors[0];
     for (let i = 0; i < trainerNames.length; i++) {
         const trainerNameDiv = document.createElement("div");
         const disciplineNameDiv = document.createElement("div");
+
         trainerNameDiv.classList.add("label");
         disciplineNameDiv.classList.add("label");
+
         trainerNameDiv.style.backgroundColor = pokemon.colors[1];
         trainerNameDiv.style.color = pokemon.colors[2];
         disciplineNameDiv.style.backgroundColor = pokemon.colors[1];
         disciplineNameDiv.style.color = pokemon.colors[2];
+
         trainerNameDiv.textContent = trainerNames[i];
         disciplineNameDiv.textContent = disciplineNames[i];
+
         pokemonLabelsContainer.append(trainerNameDiv);
         pokemonLabelsContainer.append(disciplineNameDiv);
     };
@@ -446,15 +450,33 @@ pokemonPageHeader.style.backgroundColor = pokemon.colors[0];
     }
     pokemonTopPlacement.textContent = `#${myTopPlacement}`;
 
+    /* seasons.forEach((generation, index) => {
+    let genButton = document.createElement("button");
+    genButton.textContent = `Gen ${generation.year + 1}`
+        navBar.appendChild(genButton)
 
-    // Skapar svg
+
+    genButton.addEventListener("click", () => {
+        chosenGen = seasons[index];
+        currentGen = [chosenGen];
+        console.log(currentGen, "hej")
+        renderPokemonGrid(chosenGen);
+        renderGymPageGenStats(chosenGen);
+            generationTitle.textContent = `Generation ${generation.year + 1} - ${genNameArray[index]}`;
+            pokemonSmallTitle.textContent = `Participating Pokemons - gen ${generation.year + 1}`;
+    })
+
+
+}) */
+
+    seasons.forEach(season => {
+const genButton = document.createElement("button");
+genButton.textContent = `Gen ${season.year + 1}`;
+    })
+};
+
+function renderPokemonMainData() {
     pokemonPageScoreSvg.textContent = "";
-
-    const svgData = [];
-    for (let i = 0; i < scores.length; i++) {
-        const dataObject = { x: i + 1, y: scores[i] };
-        svgData.push(dataObject);
-    };
 
     const scoreAndDateData = [];
     const g = currentGen.filter(gen => gen.competitionDays.forEach(day => {
@@ -551,6 +573,10 @@ pokemonPageHeader.style.backgroundColor = pokemon.colors[0];
 
 
     //Fyller i tabellen
+  while (pokemonPageTable.children.length > 1) {
+        pokemonPageTable.lastElementChild.remove();
+    };
+
     pokemonPageTableLabels.style.backgroundColor = pokemon.colors[0];
 
     for (let i = 0; i < scoreAndDateData.length; i += 10) {
@@ -583,4 +609,10 @@ pokemonPageHeader.style.backgroundColor = pokemon.colors[0];
 
         pokemonPageTable.append(tableRow);
     }
-};
+
+    const tableBottomDiv = document.createElement("div");
+    tableBottomDiv.classList.add("last-row");
+    tableBottomDiv.style.backgroundColor = pokemon.colors[0];
+
+    pokemonPageTable.append(tableBottomDiv);
+}

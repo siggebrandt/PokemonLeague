@@ -172,10 +172,10 @@ body {
 
 #pokemon-page-main {
     display: flex;
-    flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     gap: 20px;
+    padding-bottom: 90px;
     margin: 20px 25px;
 }
 
@@ -195,12 +195,13 @@ body {
 #table-labels,
 .table-row {
     display: flex;
-        padding: 10px;
+    padding: 10px;
+    border-bottom: 1px solid #93928e;
 }
 
 #table-labels {
-      gap: 60px;
-        border-radius: 20px 20px 0 0;
+    gap: 60px;
+    border-radius: 20px 20px 0 0;
 }
 
 .table-row {
@@ -224,4 +225,9 @@ body {
 
 .placement-value {
     width: 6px;
+}
+
+.last-row {
+    height: 20px;
+    border-radius: 0 0 20px 20px;
 }

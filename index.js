@@ -16,6 +16,9 @@ const mainPokemonPage = document.getElementById("pokemon-page-main");
 const pokemonPageScoreSvg = document.getElementById("pokemon-page-score-svg");
 const pokemonPageTable = document.getElementById("pokemon-page-table");
 const pokemonPageTableLabels = document.getElementById("table-labels");
+const tableRoundLabel = document.getElementById("round-label");
+const tableDateLabel = document.getElementById("date-label");
+const tableScoreLabel = document.getElementById("score-label");
 const tablePlacementLabel = document.getElementById("placement-label");
 
 //STARTSIDA
@@ -550,13 +553,32 @@ pokemonPageHeader.style.backgroundColor = pokemon.colors[0];
     //Fyller i tabellen
     pokemonPageTableLabels.style.backgroundColor = pokemon.colors[0];
 
-    for (let i = 0; i < scoreAndDateData.length; i++) {
-const tableRow = document.createElement("div");
-tableRow.classList.add("table-row");
+    for (let i = 0; i < scoreAndDateData.length; i += 10) {
+        const tableRow = document.createElement("div");
+        tableRow.classList.add("table-row");
+
+        const roundDiv = document.createElement("div");
+        roundDiv.classList.add("table-value");
+        roundDiv.classList.add("round-value");
+        roundDiv.textContent = `Round ${i + 1}`;
+
+        const dateDiv = document.createElement("div");
+        dateDiv.classList.add("table-value");
+        dateDiv.classList.add("date-value");
+        dateDiv.textContent = scoreAndDateData[i].date;
+
+        const scoreDiv = document.createElement("div");
+        scoreDiv.classList.add("table-value");
+        scoreDiv.classList.add("score-value");
+        scoreDiv.textContent = scores[i];
 
         const placementDiv = document.createElement("div");
+        placementDiv.classList.add("table-value");
         placementDiv.textContent = allPlacements[i];
 
+        tableRow.append(roundDiv);
+        tableRow.append(dateDiv);
+        tableRow.append(scoreDiv);
         tableRow.append(placementDiv);
 
         pokemonPageTable.append(tableRow);

@@ -450,36 +450,11 @@ pokemonPageHeader.style.backgroundColor = pokemon.colors[0];
     }
     pokemonTopPlacement.textContent = `#${myTopPlacement}`;
 
-    /* seasons.forEach((generation, index) => {
-    let genButton = document.createElement("button");
-    genButton.textContent = `Gen ${generation.year + 1}`
-        navBar.appendChild(genButton)
-
-
-    genButton.addEventListener("click", () => {
-        chosenGen = seasons[index];
-        currentGen = [chosenGen];
-        console.log(currentGen, "hej")
-        renderPokemonGrid(chosenGen);
-        renderGymPageGenStats(chosenGen);
-            generationTitle.textContent = `Generation ${generation.year + 1} - ${genNameArray[index]}`;
-            pokemonSmallTitle.textContent = `Participating Pokemons - gen ${generation.year + 1}`;
-    })
-
-
-}) */
-
-    seasons.forEach(season => {
-const genButton = document.createElement("button");
-genButton.textContent = `Gen ${season.year + 1}`;
-    })
-};
-
-function renderPokemonMainData() {
+    // Graf
     pokemonPageScoreSvg.textContent = "";
 
     const scoreAndDateData = [];
-    const g = currentGen.filter(gen => gen.competitionDays.forEach(day => {
+    currentGen.filter(gen => gen.competitionDays.forEach(day => {
         const scoreAndDate = { date: `${day.date.day}/${day.date.month}` };
         day.events.forEach(event => {
             event.scores.forEach(score => {
@@ -571,12 +546,11 @@ function renderPokemonMainData() {
         .style("font-weight", "bold")
         .text("Score over time");
 
-
-    //Fyller i tabellen
-  while (pokemonPageTable.children.length > 1) {
+          while (pokemonPageTable.children.length > 1) {
         pokemonPageTable.lastElementChild.remove();
     };
 
+    //Tabell
     pokemonPageTableLabels.style.backgroundColor = pokemon.colors[0];
 
     for (let i = 0; i < scoreAndDateData.length; i += 10) {
@@ -615,4 +589,33 @@ function renderPokemonMainData() {
     tableBottomDiv.style.backgroundColor = pokemon.colors[0];
 
     pokemonPageTable.append(tableBottomDiv);
-}
+
+       currentGen.filter(gen => gen.competitionDays.forEach(day => {
+        const scoreAndDate = { date: `${day.date.day}/${day.date.month}` };
+        day.events.forEach(event => {
+            event.scores.forEach(score => {
+                if (score.participantId === pokemon.id) {
+                    scoreAndDate.score = score.score;
+                    scoreAndDateData.push(scoreAndDate);
+                }
+            })
+        })
+    }));
+
+const genParticipatedIn = [];
+
+seasons.forEach(gen => {
+    const genOk = gen.competitionDays.some(day =>
+        day.events.some(event =>
+            event.scores.some(score =>
+                score.participantId === pokemon.id
+            )
+        )
+    );
+
+    if (genOk) {
+        genParticipatedIn.push(gen.year);
+    }
+});
+console.log(navBar.innerHTML);
+};

@@ -371,14 +371,20 @@ function createSkillList(gym) {
 
 
 function renderPokemonPage(pokemon) {
-    // Fyller i generation och tränare på vänster sida av navbaren.
     pokemonPageArrowBack.addEventListener("click", function () {
-    body.classList.remove("pokemon-page-background");
-    pokemonPage.classList.add("hide");
-    startPage.classList.remove("hide");
-});
+        body.classList.remove("pokemon-page-background");
+        pokemonPage.classList.add("hide");
+        startPage.classList.remove("hide");
+        currentPokemon = "";
 
-pokemonPageHeader.style.backgroundColor = pokemon.colors[0];
+        for (let i = 0; i < navBar.children.length; i++) {
+            navBar.children[i].classList.remove("inactive-gen-button");
+            navBar.children[i].removeEventListener("click", genButtonCLick);
+        }
+    });
+
+    // Fyller i generation och tränare på vänster sida av navbaren.
+    pokemonPageHeader.style.backgroundColor = pokemon.colors[0];
     pokemonNameLabel.textContent = pokemon.pokemonName;
 
     //Kollar först om vi valt en generation, då blir currentGen.length 1. Om vi inte valt någon generation visas alla (ALL == NaN).
@@ -590,32 +596,31 @@ pokemonPageHeader.style.backgroundColor = pokemon.colors[0];
 
     pokemonPageTable.append(tableBottomDiv);
 
-       currentGen.filter(gen => gen.competitionDays.forEach(day => {
-        const scoreAndDate = { date: `${day.date.day}/${day.date.month}` };
-        day.events.forEach(event => {
-            event.scores.forEach(score => {
-                if (score.participantId === pokemon.id) {
-                    scoreAndDate.score = score.score;
-                    scoreAndDateData.push(scoreAndDate);
-                }
-            })
-        })
-    }));
-
-const genParticipatedIn = [];
-
-seasons.forEach(gen => {
-    const genOk = gen.competitionDays.some(day =>
-        day.events.some(event =>
-            event.scores.some(score =>
-                score.participantId === pokemon.id
-            )
-        )
-    );
-
-    if (genOk) {
-        genParticipatedIn.push(gen.year);
+    // Förändrar navbaren
+    const genButtonCLick = function() {
+        renderPokemonPage(pokemon);
     }
-});
-console.log(navBar.innerHTML);
-};
+
+    const genParticipatedIn = [];
+        
+    seasons.forEach(gen => {
+        const genOk = gen.competitionDays.some(day =>
+            day.events.some(event =>
+                event.scores.some(score =>
+                    score.participantId === pokemon.id
+                )
+            )
+        );
+        if (genOk) {
+            genParticipatedIn.push(gen.year);
+        }
+    });
+        
+    for (let i = 0; i < navBar.children.length; i++) {
+        if (genParticipatedIn.some(gen => gen === i)) {
+            navBar.children[i].addEventListener("click", genButtonCLick)
+        } else {
+            navBar.children[i].classList.add("inactive-gen-button");
+        }
+    }
+}

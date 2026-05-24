@@ -231,3 +231,8 @@ body {
     height: 20px;
     border-radius: 0 0 20px 20px;
 }
+
+.inactive-gen-button {
+    background-color: gray;
+    color: rgb(103, 102, 102);
+}

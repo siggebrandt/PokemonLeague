@@ -14,6 +14,12 @@ const pokemonTotalScore = document.getElementById("pokemon-total-score");
 const pokemonTopPlacement = document.getElementById("pokemon-top-placement");
 const mainPokemonPage = document.getElementById("pokemon-page-main");
 const pokemonPageScoreSvg = document.getElementById("pokemon-page-score-svg");
+const pokemonPageTable = document.getElementById("pokemon-page-table");
+const pokemonPageTableLabels = document.getElementById("table-labels");
+const tableRoundLabel = document.getElementById("round-label");
+const tableDateLabel = document.getElementById("date-label");
+const tableScoreLabel = document.getElementById("score-label");
+const tablePlacementLabel = document.getElementById("placement-label");
 
 //STARTSIDA
 //GYMSIDA -- rardar chart
@@ -365,9 +371,20 @@ function createSkillList(gym) {
 
 
 function renderPokemonPage(pokemon) {
-    // Fyller i generation och tränare på vänster sida av navbaren.
+    pokemonPageArrowBack.addEventListener("click", function () {
+        body.classList.remove("pokemon-page-background");
+        pokemonPage.classList.add("hide");
+        startPage.classList.remove("hide");
+        currentPokemon = "";
 
-pokemonPageHeader.style.backgroundColor = pokemon.colors[0];
+        for (let i = 0; i < navBar.children.length; i++) {
+            navBar.children[i].classList.remove("inactive-gen-button");
+            navBar.children[i].removeEventListener("click", genButtonCLick);
+        }
+    });
+
+    // Fyller i generation och tränare på vänster sida av navbaren.
+    pokemonPageHeader.style.backgroundColor = pokemon.colors[0];
     pokemonNameLabel.textContent = pokemon.pokemonName;
 
     //Kollar först om vi valt en generation, då blir currentGen.length 1. Om vi inte valt någon generation visas alla (ALL == NaN).
@@ -386,14 +403,18 @@ pokemonPageHeader.style.backgroundColor = pokemon.colors[0];
     for (let i = 0; i < trainerNames.length; i++) {
         const trainerNameDiv = document.createElement("div");
         const disciplineNameDiv = document.createElement("div");
+
         trainerNameDiv.classList.add("label");
         disciplineNameDiv.classList.add("label");
+
         trainerNameDiv.style.backgroundColor = pokemon.colors[1];
         trainerNameDiv.style.color = pokemon.colors[2];
         disciplineNameDiv.style.backgroundColor = pokemon.colors[1];
         disciplineNameDiv.style.color = pokemon.colors[2];
+
         trainerNameDiv.textContent = trainerNames[i];
         disciplineNameDiv.textContent = disciplineNames[i];
+
         pokemonLabelsContainer.append(trainerNameDiv);
         pokemonLabelsContainer.append(disciplineNameDiv);
     };
@@ -435,18 +456,11 @@ pokemonPageHeader.style.backgroundColor = pokemon.colors[0];
     }
     pokemonTopPlacement.textContent = `#${myTopPlacement}`;
 
-
-    // Skapar svg
+    // Graf
     pokemonPageScoreSvg.textContent = "";
 
-    const svgData = [];
-    for (let i = 0; i < scores.length; i++) {
-        const dataObject = { x: i + 1, y: scores[i] };
-        svgData.push(dataObject);
-    };
-
     const scoreAndDateData = [];
-    const g = currentGen.filter(gen => gen.competitionDays.forEach(day => {
+    currentGen.filter(gen => gen.competitionDays.forEach(day => {
         const scoreAndDate = { date: `${day.date.day}/${day.date.month}` };
         day.events.forEach(event => {
             event.scores.forEach(score => {
@@ -458,7 +472,7 @@ pokemonPageHeader.style.backgroundColor = pokemon.colors[0];
         })
     }));
 
-    const width = 1200;
+    const width = 600;
     const height = 400;
     const margin = 40;
 
@@ -537,10 +551,76 @@ pokemonPageHeader.style.backgroundColor = pokemon.colors[0];
         .style("font-size", "24px")
         .style("font-weight", "bold")
         .text("Score over time");
-}
 
-pokemonPageArrowBack.addEventListener("click", function () {
-    body.classList.remove("pokemon-page-background");
-    pokemonPage.classList.add("hide");
-    startPage.classList.remove("hide");
-})
+          while (pokemonPageTable.children.length > 1) {
+        pokemonPageTable.lastElementChild.remove();
+    };
+
+    //Tabell
+    pokemonPageTableLabels.style.backgroundColor = pokemon.colors[0];
+
+    for (let i = 0; i < scoreAndDateData.length; i += 10) {
+        const tableRow = document.createElement("div");
+        tableRow.classList.add("table-row");
+
+        const roundDiv = document.createElement("div");
+        roundDiv.classList.add("table-value");
+        roundDiv.classList.add("round-value");
+        roundDiv.textContent = `Round ${i + 1}`;
+
+        const dateDiv = document.createElement("div");
+        dateDiv.classList.add("table-value");
+        dateDiv.classList.add("date-value");
+        dateDiv.textContent = scoreAndDateData[i].date;
+
+        const scoreDiv = document.createElement("div");
+        scoreDiv.classList.add("table-value");
+        scoreDiv.classList.add("score-value");
+        scoreDiv.textContent = scores[i];
+
+        const placementDiv = document.createElement("div");
+        placementDiv.classList.add("table-value");
+        placementDiv.textContent = allPlacements[i];
+
+        tableRow.append(roundDiv);
+        tableRow.append(dateDiv);
+        tableRow.append(scoreDiv);
+        tableRow.append(placementDiv);
+
+        pokemonPageTable.append(tableRow);
+    }
+
+    const tableBottomDiv = document.createElement("div");
+    tableBottomDiv.classList.add("last-row");
+    tableBottomDiv.style.backgroundColor = pokemon.colors[0];
+
+    pokemonPageTable.append(tableBottomDiv);
+
+    // Förändrar navbaren
+    const genButtonCLick = function() {
+        renderPokemonPage(pokemon);
+    }
+
+    const genParticipatedIn = [];
+        
+    seasons.forEach(gen => {
+        const genOk = gen.competitionDays.some(day =>
+            day.events.some(event =>
+                event.scores.some(score =>
+                    score.participantId === pokemon.id
+                )
+            )
+        );
+        if (genOk) {
+            genParticipatedIn.push(gen.year);
+        }
+    });
+        
+    for (let i = 0; i < navBar.children.length; i++) {
+        if (genParticipatedIn.some(gen => gen === i)) {
+            navBar.children[i].addEventListener("click", genButtonCLick)
+        } else {
+            navBar.children[i].classList.add("inactive-gen-button");
+        }
+    }
+}

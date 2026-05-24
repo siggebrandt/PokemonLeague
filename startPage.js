@@ -11,6 +11,7 @@ let pokemonSmallTitle = document.querySelector("#pokemonSmallTitle")
 
 numberOfSeason = seasons.length;
 let currentGen = seasons;
+let currentPokemon = "";
 let genNameArray = [
     "Kanto",
     "Johto",
@@ -101,6 +102,7 @@ function createPokemonCards(pokemonArray) {
             pokemonPicture.style.backgroundImage = `url(${imageUrl})`;
 
             renderPokemonPage(pokemon);
+            currentPokemon = pokemon;
         })
     })
 }

@@ -520,6 +520,8 @@ function renderPokemonPage(pokemon) {
         .on("mouseover", function (event, d) {
             tooltip
                 .style("display", "block")
+                .style("background-color", `${pokemon.colors[1]}`)
+                .style("border", "none")
                 .html(`Score: ${d.score}`);
         })
         .on("mousemove", function (event) {
@@ -556,6 +558,8 @@ function renderPokemonPage(pokemon) {
         pokemonPageTable.lastElementChild.remove();
     };
 
+
+
     //Tabell
     pokemonPageTableLabels.style.backgroundColor = pokemon.colors[0];
 
@@ -580,7 +584,7 @@ function renderPokemonPage(pokemon) {
 
         const placementDiv = document.createElement("div");
         placementDiv.classList.add("table-value");
-        placementDiv.textContent = allPlacements[i];
+        placementDiv.textContent = `#${allPlacements[i]}`;
 
         tableRow.append(roundDiv);
         tableRow.append(dateDiv);

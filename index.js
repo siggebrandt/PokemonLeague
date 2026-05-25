@@ -400,7 +400,7 @@ function renderPokemonPage(pokemon) {
         const currentTrainersId = currentGen.map(gen => gen.trainers.find(trainer => trainer.participantId === pokemon.id)).filter(trainer => trainer != undefined).map(trainer => trainer.trainerId);
         const trainerNames = currentTrainersId.map(trainer => trainers.find(t => t.id === trainer)).map(trainer => trainer.name);
         const trainerDisciplineId = currentTrainersId.map(trainer => trainers.find(t => t.id === trainer)).map(trainer => trainer.disciplineId);
-        const disciplineNames = trainerDisciplineId.map(trainer => disciplines.find(discipline => discipline.id === trainer)).map(discipline => discipline.name);
+        const disciplineNames = trainerDisciplineId.map(trainer => disciplines.find(discipline => discipline.id === trainer)).map(discipline => discipline.gymName);
 
         for (let i = 0; i < trainerNames.length; i++) {
             const trainerNameDiv = document.createElement("div");
@@ -414,7 +414,7 @@ function renderPokemonPage(pokemon) {
             disciplineNameDiv.style.backgroundColor = pokemon.colors[1];
             disciplineNameDiv.style.color = pokemon.colors[2];
 
-            trainerNameDiv.textContent = trainerNames[i];
+            trainerNameDiv.textContent = `Trainer ${trainerNames[i]}`;
             disciplineNameDiv.textContent = disciplineNames[i];
 
             pokemonLabelsContainer.append(trainerNameDiv);
@@ -575,7 +575,7 @@ function renderPokemonPage(pokemon) {
         const roundDiv = document.createElement("div");
         roundDiv.classList.add("table-value");
         roundDiv.classList.add("round-value");
-        roundDiv.textContent = `Round ${i + 1}`;
+        roundDiv.textContent = `${i + 1}`;
 
         const dateDiv = document.createElement("div");
         dateDiv.classList.add("table-value");
@@ -589,12 +589,40 @@ function renderPokemonPage(pokemon) {
 
         const placementDiv = document.createElement("div");
         placementDiv.classList.add("table-value");
+        placementDiv.classList.add("placement-value");
         placementDiv.textContent = `#${allPlacements[i]}`;
+
+        if (allPlacements[i] === 1) {
+            placementDiv.classList.add("gold");
+        } else if (allPlacements[i] === 2) {
+            placementDiv.classList.add("silver");
+        } else if (allPlacements[i] === 3) {
+            placementDiv.classList.add("bronze");
+        }
+
+        const trendDiv = document.createElement("div");
+        trendDiv.classList.add("table-value");
+        trendDiv.classList.add("trend-value");
+        
+        let difference = scoreAndDateData[i].score;
+        if (i > 0) {
+            difference = scoreAndDateData[i].score - scoreAndDateData[i - 10].score;
+            if (difference < 0) {
+                trendDiv.classList.add("negative-trend");
+                trendDiv.textContent = `${difference}`;
+            } else if (difference > 0) {
+            trendDiv.classList.add("positive-trend");
+            trendDiv.textContent = `+${difference}`;
+            }
+        } else {
+            trendDiv.textContent = `-`;
+        }
 
         tableRow.append(roundDiv);
         tableRow.append(dateDiv);
         tableRow.append(scoreDiv);
         tableRow.append(placementDiv);
+        tableRow.append(trendDiv);
 
         pokemonPageTable.append(tableRow);
     }

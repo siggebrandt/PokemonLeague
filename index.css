@@ -13,7 +13,6 @@ body{
     margin: 0;
     padding: 0; 
     border: 0;
-    box-sizing: border-box;
 }
 
 #navBar {
@@ -133,6 +132,7 @@ body {
     background-repeat: no-repeat;
     width: 80px;
     height: 80px;
+    border: 1px solid #93928e;
     border-radius: 4px;
 }
 
@@ -145,6 +145,7 @@ body {
 }
 
 #pokemon-name-label {
+    font-weight: bold;
     margin: 0;
 }
 
@@ -161,7 +162,7 @@ body {
 
 #generation-label {
     background-color: white;
-    border: 1px solid black;
+    border: 1px solid #93928e;
     box-sizing: border-box;
 }
 
@@ -178,6 +179,10 @@ body {
     margin: 0;
 }
 
+.pokemon-points-and-placement h2 {
+    font-weight: bold;
+}
+
 .seperator {
     border-right: 1px solid #93928e;
 }
@@ -192,8 +197,9 @@ body {
 }
 
 #pokemon-page-score-svg {
-     border-radius: 4px;
-      background-color: white;
+    border: 1px solid #93928e;
+    border-radius: 4px;
+    background-color: white;
 }
 
 #svg-label-container {
@@ -220,52 +226,88 @@ body {
     z-index: -1;
 }
 
-#pokemon-page-tabel {
+#pokemon-page-table {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
     background-color: white;
+    border: 1px solid #93928e;
+    border-radius: 4px;
 }
 
 #table-labels,
 .table-row {
     display: flex;
     padding: 10px;
-    border-bottom: 1px solid #93928e;
+    border-bottom: 1px solid black;
 }
 
 #table-labels {
     gap: 60px;
-    border-radius: 4px 4px 0 0;
+    font-weight: bold;
 }
 
 .table-row {
+    display: flex;
+    align-items: center;
     background-color: white;
 }
 
 .round-value {
-    width: 48px;
-    margin-right: 42px;
+    width: 20px;
+    margin-right: 72px;
 }
 
 .date-value {
     width: 20px;
-    margin-right: 63px;
+    margin-right: 64px;
 }
 
 .score-value {
     width: 20px;
-    margin-right: 70px;
+    margin-right: 72px;
 }
 
 .placement-value {
-    width: 6px;
+    width: 14px;
+    margin-right: 91px;
+    padding: 0 5px;
+    border: 1px solid #93928e;
+    border-radius: 4px;
+}
+
+.gold {
+    background-color: gold;
+    border: 1px solid darkgoldenrod;
+    box-shadow: inset 0 2px 4px rgba(255,255,255,0.7);
+}
+
+.silver {
+    background-color: silver;
+    border: 1px solid gray;
+    box-shadow: inset 0 2px 4px rgba(255,255,255,0.7);
+}
+
+.bronze {
+    background-color: rgb(205, 127, 50);
+    border: 1px solid rgb(141, 87, 34);
+    box-shadow: inset 0 2px 4px rgba(255,255,255,0.7);
+}
+
+.trend-value {
+    width: 24px;
+}
+
+.negative-trend {
+    color: red;
+}
+
+.positive-trend {
+    color: green;
 }
 
 .last-row {
     height: 20px;
-    border-radius: 0 0 4px 4px;
 }
 
 .inactive-gen-button {

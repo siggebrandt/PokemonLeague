@@ -437,6 +437,7 @@ function renderPokemonPage(pokemon) {
         trendDiv.classList.add("trend-value");
         
         let difference = scoreAndDateData[i].score;
+        trendDiv.textContent = "-";
         if (i > 0) {
             difference = scoreAndDateData[i].score - scoreAndDateData[i - 10].score;
             if (difference < 0) {
@@ -445,9 +446,9 @@ function renderPokemonPage(pokemon) {
             } else if (difference > 0) {
             trendDiv.classList.add("positive-trend");
             trendDiv.textContent = `+${difference}`;
+            } else if (i != 0 && difference === 0) {
+            trendDiv.textContent = `${difference}`;
             }
-        } else {
-            trendDiv.textContent = `-`;
         }
 
         tableRow.append(roundAndGymDiv);

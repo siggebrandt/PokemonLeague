@@ -1,4 +1,12 @@
 /* - GymPage - */
+#gymPage {
+    background-image: url("bilder/gymBG.webp");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
 #gymBanner {
     display: flex;
     align-items: center;
@@ -7,14 +15,17 @@
     width: 100vw;
     height: 20vh;
     color: white;
+    font-size: 26px;
 }
 
 #gymStats {
     display: flex;
     gap: 20px;
     justify-content: space-between;
-    margin: 0 50px;
+    padding: 20px 80px;
 }
+#gymBannerBack { filter: invert(1);}
+
 /* LEFT SIDE */
 #gymStatsLeft {
     display: flex;
@@ -24,9 +35,11 @@
 /* Score Board */
 #gymStatsScoreBoard {
     height: 350px;
-    width: 650px;
+    width: 700px;
     overflow: scroll;
     font-size: 22px;
+    border-radius: 5px;
+    margin-bottom: 35px;
 }
 
 
@@ -39,8 +52,27 @@ table {
     background-color: red;
     color: white;
 }
+tr {
+    height: 28px;
+    text-align: left;
+}
+th {
+    height: 42px;
+}
+
+th:nth-of-type(1) {
+    text-align: left;
+    padding-left: 20px;
+}
+th:nth-of-type(4) {
+    text-align: right;
+    padding-right: 20px;
+}
 tr:nth-of-type(even) {
     background-color: #eeeeee;
+}
+tr:nth-of-type(odd) {
+    background-color: #ffffff;
 }
 
 /* Scatter Plot */
@@ -58,4 +90,5 @@ tr:nth-of-type(even) {
 /* Radar Chart */
 #gymStatsRadarChart {
     background: white;
+    margin-bottom: 10px;
 }

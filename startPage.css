@@ -109,6 +109,9 @@
 #radarChartSkillDisplay {
     display: flex;
     flex-direction: column;
+    padding: 0 10px;
+    background-color: white;
+    border-radius: 5px;
 }
 
 .skillRow {

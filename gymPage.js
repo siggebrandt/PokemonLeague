@@ -19,7 +19,10 @@ function renderGymPageGenStats (gen) {
 /*     console.log("CHOSEN", gen)
     console.log("currentGYM", currentGym) */
     document.querySelector("#gymBannerTitle").textContent = `${currentGym.gymName} - Generation ${Number(gen.year) + 1}`;
-  } ;
+
+    let pokemonsInGymAndGen = gymScoreCalculateFinalScore(currentGym, gen);
+    gymScoreBoard(pokemonsInGymAndGen)
+  }
 
 
 function renderGymPage(gym, gen) {
@@ -35,6 +38,9 @@ function renderGymPage(gym, gen) {
     document.querySelector("#gymBannerTitle").textContent = `${gym.gymName} - Generation ${Number(gen.year) + 1}`;
     
     gymBanner.style.backgroundColor = gym.color; 
+    document.querySelectorAll("#gymStatsScoreBoard table thead th").forEach((th) => {
+      th.style.backgroundColor = gym.color
+    })
 
     createRadarChart(gym);
     createSkillList(gym);
@@ -94,24 +100,34 @@ function pokemonsTrainerforGen(pokemonId, gen) {
 
 function gymScoreBoard (participatingPokemons) {
     const tableBody = document.querySelector("#gymStatsScoreBoard table tbody");
+    tableBody.innerHTML = "";
 
     let tableIndex = 1;
 
     participatingPokemons.forEach((pokemon) => {
       const tableRow = document.createElement("tr");
-      tableRow.textContent = tableIndex;
-      tableIndex++;
+      //tableRow.textContent = tableIndex;
+      
       tableBody.appendChild(tableRow);
+
+      // tableRow.textContent = tableIndex;
+
+      const tableDataIndex = document.createElement("td");
+      tableDataIndex.textContent = tableIndex;
+      tableDataIndex.style.paddingLeft = "20px"
+      tableIndex++;
 
       const tableDataPokemon = document.createElement("td");
       tableDataPokemon.textContent = pokemonIdToName(pokemon.id);
       const tableDataTrainer = document.createElement("td");
       tableDataTrainer.textContent = pokemonsTrainerforGen(pokemon.id, currentGen[0]);
-      tableDataTrainer.style.textAlign = "center"
+      tableDataTrainer.style.textAlign = "left"
       const tableDataScore = document.createElement("td");
       tableDataScore.textContent = pokemon.totalScore;
+      tableDataScore.style.paddingRight = "20px"
+
       tableDataScore.style.textAlign = "right"
-      tableRow.append(tableDataPokemon, tableDataTrainer, tableDataScore);
+      tableRow.append(tableDataIndex, tableDataPokemon, tableDataTrainer, tableDataScore);
     });
 }
 

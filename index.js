@@ -282,6 +282,9 @@ function renderPokemonPage(pokemon) {
     currentGen.filter(gen => gen.competitionDays.forEach(day => {
         const scoreAndDate = { date: `${day.date.day}/${day.date.month}` };
         day.events.forEach(event => {
+            const gymId = event.disciplineId;
+            const gym = disciplines.find(discipline => discipline.id === gymId).gymName;
+            scoreAndDate.gym = gym;
             event.scores.forEach(score => {
                 if (score.participantId === pokemon.id) {
                     scoreAndDate.score = score.score;
@@ -390,10 +393,21 @@ function renderPokemonPage(pokemon) {
         const tableRow = document.createElement("div");
         tableRow.classList.add("table-row");
 
+        const roundAndGymDiv = document.createElement("div");
+        roundAndGymDiv.classList.add("round-and-gym");
+
         const roundDiv = document.createElement("div");
         roundDiv.classList.add("table-value");
         roundDiv.classList.add("round-value");
         roundDiv.textContent = `${i + 1}`;
+
+        const gymDiv = document.createElement("div");
+        gymDiv.classList.add("table-value");
+        gymDiv.classList.add("gym-value");
+        gymDiv.textContent = `${scoreAndDateData[i].gym}`;
+
+        roundAndGymDiv.append(roundDiv);
+        roundAndGymDiv.append(gymDiv);
 
         const dateDiv = document.createElement("div");
         dateDiv.classList.add("table-value");
@@ -436,7 +450,7 @@ function renderPokemonPage(pokemon) {
             trendDiv.textContent = `-`;
         }
 
-        tableRow.append(roundDiv);
+        tableRow.append(roundAndGymDiv);
         tableRow.append(dateDiv);
         tableRow.append(scoreDiv);
         tableRow.append(placementDiv);

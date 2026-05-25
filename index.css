@@ -247,15 +247,30 @@ body {
     font-weight: bold;
 }
 
+#round-label {
+    margin-right: 66px;
+}
+
 .table-row {
     display: flex;
     align-items: center;
     background-color: white;
 }
 
+.round-and-gym {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 .round-value {
     width: 20px;
-    margin-right: 72px;
+    margin-right: 138px;
+}
+
+.gym-value {
+    font-size: 14px;
+    color: #93928e;
 }
 
 .date-value {

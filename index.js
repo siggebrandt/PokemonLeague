@@ -387,37 +387,40 @@ function renderPokemonPage(pokemon) {
     pokemonPageHeader.style.backgroundColor = pokemon.colors[0];
     pokemonNameLabel.textContent = pokemon.pokemonName;
 
-    //Kollar först om vi valt en generation, då blir currentGen.length 1. Om vi inte valt någon generation visas alla (ALL == NaN).
-    const getCurrentGenNumber = currentGen.length === 1 ? currentGen.map(gen => gen.year + 1) : NaN;
-    pokemonGenLabel.textContent = getCurrentGenNumber ? `Generation ${getCurrentGenNumber}` : "All Generations";
+    pokemonLabelsContainer.textContent = "";
+    const currentGenNumber = currentGen.length === 1 ? currentGen.map(gen => gen.year + 1) : false;
+    if(currentGenNumber) {
+        const genLabelDiv = document.createElement("div");
+        genLabelDiv.classList.add("label");
+        genLabelDiv.id = "generation-label";
+        genLabelDiv.textContent = `Generation ${currentGenNumber}`;
 
-    while (pokemonLabelsContainer.children.length > 1) {
-        pokemonLabelsContainer.lastElementChild.remove();
-    };
+        pokemonLabelsContainer.append(genLabelDiv);
 
-    const currentTrainersId = currentGen.map(gen => gen.trainers.find(trainer => trainer.participantId === pokemon.id)).filter(trainer => trainer != undefined).map(trainer => trainer.trainerId);
-    const trainerNames = currentTrainersId.map(trainer => trainers.find(t => t.id === trainer)).map(trainer => trainer.name);
-    const trainerDisciplineId = currentTrainersId.map(trainer => trainers.find(t => t.id === trainer)).map(trainer => trainer.disciplineId);
-    const disciplineNames = trainerDisciplineId.map(trainer => disciplines.find(discipline => discipline.id === trainer)).map(discipline => discipline.name);
+        const currentTrainersId = currentGen.map(gen => gen.trainers.find(trainer => trainer.participantId === pokemon.id)).filter(trainer => trainer != undefined).map(trainer => trainer.trainerId);
+        const trainerNames = currentTrainersId.map(trainer => trainers.find(t => t.id === trainer)).map(trainer => trainer.name);
+        const trainerDisciplineId = currentTrainersId.map(trainer => trainers.find(t => t.id === trainer)).map(trainer => trainer.disciplineId);
+        const disciplineNames = trainerDisciplineId.map(trainer => disciplines.find(discipline => discipline.id === trainer)).map(discipline => discipline.name);
 
-    for (let i = 0; i < trainerNames.length; i++) {
-        const trainerNameDiv = document.createElement("div");
-        const disciplineNameDiv = document.createElement("div");
+        for (let i = 0; i < trainerNames.length; i++) {
+            const trainerNameDiv = document.createElement("div");
+            const disciplineNameDiv = document.createElement("div");
 
-        trainerNameDiv.classList.add("label");
-        disciplineNameDiv.classList.add("label");
+            trainerNameDiv.classList.add("label");
+            disciplineNameDiv.classList.add("label");
 
-        trainerNameDiv.style.backgroundColor = pokemon.colors[1];
-        trainerNameDiv.style.color = pokemon.colors[2];
-        disciplineNameDiv.style.backgroundColor = pokemon.colors[1];
-        disciplineNameDiv.style.color = pokemon.colors[2];
+            trainerNameDiv.style.backgroundColor = pokemon.colors[1];
+            trainerNameDiv.style.color = pokemon.colors[2];
+            disciplineNameDiv.style.backgroundColor = pokemon.colors[1];
+            disciplineNameDiv.style.color = pokemon.colors[2];
 
-        trainerNameDiv.textContent = trainerNames[i];
-        disciplineNameDiv.textContent = disciplineNames[i];
+            trainerNameDiv.textContent = trainerNames[i];
+            disciplineNameDiv.textContent = disciplineNames[i];
 
-        pokemonLabelsContainer.append(trainerNameDiv);
-        pokemonLabelsContainer.append(disciplineNameDiv);
-    };
+            pokemonLabelsContainer.append(trainerNameDiv);
+            pokemonLabelsContainer.append(disciplineNameDiv);
+        }
+    }
 
 
     // Fyller i poäng och placering på höger sida av navbaren.
@@ -520,6 +523,8 @@ function renderPokemonPage(pokemon) {
         .on("mouseover", function (event, d) {
             tooltip
                 .style("display", "block")
+                .style("background-color", `${pokemon.colors[1]}`)
+                .style("border", "none")
                 .html(`Score: ${d.score}`);
         })
         .on("mousemove", function (event) {
@@ -556,6 +561,8 @@ function renderPokemonPage(pokemon) {
         pokemonPageTable.lastElementChild.remove();
     };
 
+
+
     //Tabell
     pokemonPageTableLabels.style.backgroundColor = pokemon.colors[0];
 
@@ -580,7 +587,7 @@ function renderPokemonPage(pokemon) {
 
         const placementDiv = document.createElement("div");
         placementDiv.classList.add("table-value");
-        placementDiv.textContent = allPlacements[i];
+        placementDiv.textContent = `#${allPlacements[i]}`;
 
         tableRow.append(roundDiv);
         tableRow.append(dateDiv);

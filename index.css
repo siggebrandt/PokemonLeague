@@ -118,13 +118,22 @@ body {
     height: 40px;
 }
 
+#pokemon-page-arrow-back:hover, #gymBannerBack:hover {
+    transform: scale(1.15);
+}
+
+#pokemon-page-arrow-back:active, #gymBannerBack:active {
+    transform: scale(1);
+    background-image: url(icons/arrowbackactive.svg);
+}
+
 #pokemon-picture {
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
     width: 80px;
     height: 80px;
-    border-radius: 50%;
+    border-radius: 4px;
 }
 
 #pokemon-name-and-labels {
@@ -146,7 +155,7 @@ body {
 }
 
 .label {
-    border-radius: 25px;
+    border-radius: 4px;
     padding: 5px;
 }
 
@@ -183,7 +192,7 @@ body {
 }
 
 #pokemon-page-score-svg {
-     border-radius: 20px;
+     border-radius: 4px;
       background-color: white;
 }
 
@@ -204,7 +213,7 @@ body {
 
 #table-labels {
     gap: 60px;
-    border-radius: 20px 20px 0 0;
+    border-radius: 4px 4px 0 0;
 }
 
 .table-row {
@@ -232,7 +241,7 @@ body {
 
 .last-row {
     height: 20px;
-    border-radius: 0 0 20px 20px;
+    border-radius: 0 0 4px 4px;
 }
 
 .inactive-gen-button {

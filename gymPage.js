@@ -15,11 +15,16 @@ Det finns också ett särskilt pris för varje gren
 
  */
 
-function renderGymPageGenStats (chosenGen) {
+function renderGymPageGenStats (gen) {
+  if (!currentGym || !gen) return;
+    console.log("CHOSEN", gen)
+    console.log("currentGYM", currentGym)
+    document.querySelector("#gymBannerTitle").textContent = `${currentGym.gymName} - Generation ${Number(gen.year) + 1}`;
+  } ;
 
-}
 
 function renderGymPage(gym, gen) {
+    currentGym = gym;
     document.getElementById("radarChartSvg").innerHTML = "";
     document.getElementById("radarChartSkillDisplay").innerHTML = "";
     console.log("GEN", gen);
@@ -36,9 +41,6 @@ function renderGymPage(gym, gen) {
     createSkillList(gym);
     let pokemonsInGymAndGen = gymScoreCalculateFinalScore(gym, gen);
     gymScoreBoard(pokemonsInGymAndGen)
-}
-
-function renderGymPageGenStats (gen) {
 }
 
 /*********  A N V Ä N D A   D E N N A F U N K T I O N       F Ö R     A T T      F Y L L A       T A B E L L E N */
@@ -102,7 +104,7 @@ function gymScoreBoard (participatingPokemons) {
       const tableDataPokemon = document.createElement("td");
       tableDataPokemon.textContent = pokemonIdToName(pokemon.id);
       const tableDataTrainer = document.createElement("td");
-      tableDataTrainer.textContent = "trainer"
+      tableDataTrainer.textContent = "trainer" // trainerIdToName
       tableDataTrainer.style.textAlign = "center"
       const tableDataScore = document.createElement("td");
       tableDataScore.textContent = pokemon.totalScore;

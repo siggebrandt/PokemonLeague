@@ -23,6 +23,7 @@ const tablePlacementLabel = document.getElementById("placement-label");
 
 //STARTSIDA
 //GYMSIDA -- rardar chart
+let currentGym = null;
 
 let radarChartSvg = document.querySelector("#radarChartSvg");
 let radarChartHoverDiv = document.querySelector("#radarChartHoverDiv");

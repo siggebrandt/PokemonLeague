@@ -25,7 +25,7 @@ let genNameArray = [
     "Kitakami"
 ];
 //STARTSIDA
-//Skapa navBar 
+//Skapa navBar
 seasons.forEach((generation, index) => {
     //Loopar igenom alla säsonger och bygger själva knappen. Använder forEach så att jag kan använda index.
     let genButton = document.createElement("button");
@@ -74,6 +74,7 @@ disciplines.forEach((gym) => {
 
     //Event listener
     gymCard.addEventListener("click", () => {
+        currentGym = gym;
         renderGymPage(gym, currentGen[0])
         //Här kanske man anropar någon funktion.
         //Kan till exempel stå renderGymPage(gym);
@@ -146,42 +147,3 @@ function renderPokemonGrid(gen) {
 }
 
 renderPokemonGrid(null);
-
-//Pokemon Wrapped
-let pokemonWrapped = document.querySelector("#pokemonWrapped");
-let wrappedButton = document.querySelector("#wrappedButton");
-let closeWrappButton = document.querySelector("#crossToClosePage")
-let nextWrapButton = document.querySelector("#arrowToNextPage");
-
-let currentCard = 0;
-let wrappedCardArray = [
-    { title: "Bästa Pokémon någonsin", value: "" },
-    { title: "Mest konsistenta", value: "" },
-    { title: "Bästa generation", value: "" },
-  ];
-
-//addEventListner 
-wrappedButton.addEventListener("click", () => {
-    pokemonWrapped.classList.remove("hide");
-});
-
-closeWrappButton.addEventListener("click", () => {
-    pokemonWrapped.classList.add("hide");
-});
-
-nextWrapButton.addEventListener("click", () => {
-    currentCard++;
-});
-
-seasons.forEach((gen) => {
-    console.log(gen);
-    gen.competitionDays.forEach((day) => {
-        day.events.forEach((event) => {
-            event.scores.forEach((score) => {
-                console.log(score);
-            })
-        })
-    })
-})
-
-

@@ -16,6 +16,6 @@ The project work was divided between the group members as follows:
 
 The project is available at:
 
-- [GitHub Repository](https://github.com/siggebrandt/PokemonTournament)
+- [GitHub Repository](https://github.com/siggebrandt/PokemonLeague)
 
-- [GitHub Pages](https://siggebrandt.github.io/PokemonTournament/)
+- [GitHub Pages](https://siggebrandt.github.io/PokemonLeague/)

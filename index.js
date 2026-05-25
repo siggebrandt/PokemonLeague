@@ -446,8 +446,6 @@ function renderPokemonPage(pokemon) {
             } else if (difference > 0) {
             trendDiv.classList.add("positive-trend");
             trendDiv.textContent = `+${difference}`;
-            } else if (i != 0 && difference === 0) {
-            trendDiv.textContent = `${difference}`;
             }
         }
 

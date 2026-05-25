@@ -34,13 +34,20 @@ seasons.forEach((generation, index) => {
 
 
     genButton.addEventListener("click", () => {
+        gymCardContainer.classList.remove("no-click");
+        document.querySelectorAll("#navBar button").forEach(button => {
+            button.classList.remove("navBarChosen");
+        });
+
+        genButton.classList.add("navBarChosen");
+
         chosenGen = seasons[index];
         currentGen = [chosenGen];
-        console.log(currentGen, "hej")
+        //console.log(currentGen, "hej")
         renderPokemonGrid(chosenGen);
         renderGymPageGenStats(chosenGen);
-            generationTitle.textContent = `Generation ${generation.year + 1} - ${genNameArray[index]}`;
-            pokemonSmallTitle.textContent = `Participating Pokemons - gen ${generation.year + 1}`;
+        generationTitle.textContent = `Generation ${generation.year + 1} - ${genNameArray[index]}`;
+        pokemonSmallTitle.textContent = `Participating Pokemons - gen ${generation.year + 1}`;
     })
     //console.log(generation, index)
 })
@@ -53,6 +60,7 @@ disciplines.forEach((gym) => {
     gymCard.classList.add("gymCards");
     gymImage.classList.add("gymImages");
     gymName.classList.add("gymNames")
+    
 
     //Append
     gymCardContainer.appendChild(gymCard);

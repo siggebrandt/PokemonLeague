@@ -1,124 +1,115 @@
 <!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pokemon Tournament</title>
+    <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="startPage.css" />
+    <link rel="stylesheet" href="gymPage.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pokemon Tournament</title>
-  <link rel="stylesheet" href="index.css" />
-  <link rel="stylesheet" href="startPage.css">
-  <link rel="stylesheet" href="gymPage.css" />
-
-</head>
-
-<body>
-  <div id="navBar"></div>
-  <div id="radarChartHoverDiv"></div>
-  <div id="startPage" class="">
-    <div id="whiteFilter">
-      <div id="startPageContainer">
-    <div id="startPageTextContainer">
-    <h1 id="startPageTitle">Pokemon league</h1>
-    <h3 id="generationText">Please chose a generation to start</h3>
-  </div>
-    <div id="gymAndTextContainer">
-      <h3 id="gymSmallTitle">Tournaments</h3>
-    <div id="gymCardContainer" class="no-click"></div>
-  </div>
-  <div id="pokemonAndTextContainer">
-    <h3 id="pokemonSmallTitle">Participating Pokemons</h3>
-    <div id="pokemonGrid" class="no-click"></div>
-  </div>
-  </div>
-  </div>
-  </div>
-
-
-
-  <div id="gymPage" class="hide">
-    <div id="gymBanner">
-      <div id="gymBannerBack"></div>
-      <p id="gymBannerTitle"></p>
-      <div id="gymBannerStats"></div>
-      </div>
-
-    <div id="gymStats">
-      <div id="gymStatsLeft">
-        <div id="gymStatsScoreBoard">
-          <table>
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">pokemon</th>
-                <th scope="col">trainer</th>
-                <th scope="col">final score</th>
-              </tr>
-            </thead>
-            
-            <tbody>
-            </tbody>
-          </table>
-            
-        </div>
-        <div id="gymStatsScatterPlot">
-          <svg id="scatterPlotSvg" height="450" width="400px"></svg>
+  <body>
+    <div id="navBar"></div>
+    <div id="radarChartHoverDiv"></div>
+    <div id="startPage" class="">
+      <div id="whiteFilter">
+        <div id="startPageContainer">
+          <div id="startPageTextContainer">
+            <h1 id="startPageTitle">Pokemon league</h1>
+            <h3 id="generationText">Please chose a generation to start</h3>
+          </div>
+          <div id="gymAndTextContainer">
+            <h3 id="gymSmallTitle">Tournaments</h3>
+            <div id="gymCardContainer" class="no-click"></div>
+          </div>
+          <div id="pokemonAndTextContainer">
+            <h3 id="pokemonSmallTitle">Participating Pokemons</h3>
+            <div id="pokemonGrid" class="no-click"></div>
+          </div>
         </div>
       </div>
-
-      <div id="gymStatsRight">
-        <div id="gymStatsRadarChart">
-          <svg id="radarChartSvg" height="400" width="400"></svg>
-        </div>
-        <div id="radarChartSkillDisplay"></div>
-        <div id="gymStatsBarChart"></div>
-      </div>
-
     </div>
-  </div>
-  
-  <div id="pokemon-page" class="hide">
-    <header id="pokemon-page-header">
-      <div id="header-contents-left">
-        <div id="pokemon-page-arrow-back"></div>
-        <div id="pokemon-picture"></div>
-        <div id="pokemon-name-and-labels">
-          <h2 id="pokemon-name-label"></h2>
-          <div id="labels-container"></div>
-        </div>
-      </div>
-      <div id="header-contents-right">
-        <div class="pokemon-points-and-placement seperator">
-          <h2 id="pokemon-top-score"></h2>
-          <p>Top Points</p>
-        </div>
-        <div class="pokemon-points-and-placement seperator">
-          <h2 id="pokemon-total-score"></h2>
-          <p>Total Points</p>
-        </div>
-        <div class="pokemon-points-and-placement">
-          <h2 id="pokemon-top-placement"></h2>
-          <p>Top Placement</p>
-        </div>
-      </div>
-    </header>
-    <main id="pokemon-page-main">
-      <div id="pokemon-page-score-svg"></div>
-      <div id="pokemon-page-table">
-        <div id="table-labels">
-          <p id="round-label">Round</p>
-          <p id="date-label">Date</p>
-          <p id="score-label">Score</p>
-          <p id="placement-label">Placement</p>
-          <p id="trend-label">Trend</p>
-        </div>
-      </div>
-    </main>
-  </div>
-  <script src="d3.v7.min.js"></script>
-  <script src="dataset.js"></script>
-  <script src="startPage.js"></script>
-  <script src="index.js"></script>
-  <script src="gymPage.js"></script>
-</body>
 
+    <div id="gymPage" class="hide">
+      <div id="gymBanner">
+        <div id="gymBannerBack"></div>
+        <p id="gymBannerTitle"></p>
+        <div id="gymBannerStats"></div>
+      </div>
+      <div id="gymStats">
+        <div id="gymStatsLeft">
+          <div id="gymStatsScoreBoard">
+            <p id="gymStatsScoreBoardTitle">Scoreboard</p>
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">pokemon</th>
+                  <th scope="col">trainer</th>
+                  <th scope="col">final score</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <div id="gymStatsScatterPlot">
+            <p id="gymStatsScatterPlotTitle">Scatter Plot Results</p>
+            <svg id="scatterPlotSvg" height="450" width="725px"></svg>
+          </div>
+        </div>
+        <div id="gymStatsRight">
+          <div id="gymStatsRadarChart">
+            <svg id="radarChartSvg" height="400" width="400"></svg>
+          </div>
+          <div id="radarChartSkillDisplay"></div>
+          <div id="gymStatsBarChart"></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="pokemon-page" class="hide">
+      <header id="pokemon-page-header">
+        <div id="header-contents-left">
+          <div id="pokemon-page-arrow-back"></div>
+          <div id="pokemon-picture"></div>
+          <div id="pokemon-name-and-labels">
+            <h2 id="pokemon-name-label"></h2>
+            <div id="labels-container"></div>
+          </div>
+        </div>
+        <div id="header-contents-right">
+          <div class="pokemon-points-and-placement seperator">
+            <h2 id="pokemon-top-score"></h2>
+            <p>Top Points</p>
+          </div>
+          <div class="pokemon-points-and-placement seperator">
+            <h2 id="pokemon-total-score"></h2>
+            <p>Total Points</p>
+          </div>
+          <div class="pokemon-points-and-placement">
+            <h2 id="pokemon-top-placement"></h2>
+            <p>Top Placement</p>
+          </div>
+        </div>
+      </header>
+      <main id="pokemon-page-main">
+        <div id="pokemon-page-score-svg"></div>
+        <div id="pokemon-page-table">
+          <div id="table-labels">
+            <p id="round-label">Round</p>
+            <p id="date-label">Date</p>
+            <p id="score-label">Score</p>
+            <p id="placement-label">Placement</p>
+            <p id="trend-label">Trend</p>
+          </div>
+        </div>
+      </main>
+    </div>
+    <script src="d3.v7.min.js"></script>
+    <script src="dataset.js"></script>
+    <script src="startPage.js"></script>
+    <script src="index.js"></script>
+    <script src="gymPage.js"></script>
+  </body>
 </html>

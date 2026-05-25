@@ -1,94 +1,104 @@
 /* - GymPage - */
 #gymPage {
-    background-image: url("bilder/gymBG.webp");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+  background-image: url("bilder/gymBG.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 #gymBanner {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 20px;
-    width: 100vw;
-    height: 20vh;
-    color: white;
-    font-size: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 20px;
+  width: 100vw;
+  height: 20vh;
+  color: white;
+  font-size: 26px;
 }
 
 #gymStats {
-    display: flex;
-    gap: 20px;
-    justify-content: space-between;
-    padding: 20px 80px;
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+  padding: 20px 80px;
 }
-#gymBannerBack { filter: invert(1);}
+#gymBannerBack {
+  filter: invert(1);
+}
 
 /* LEFT SIDE */
 #gymStatsLeft {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Score Board */
 #gymStatsScoreBoard {
-    height: 350px;
-    width: 700px;
-    overflow: scroll;
-    font-size: 22px;
-    border-radius: 5px;
-    margin-bottom: 35px;
+  height: 400px;
+  width: 725px;
+  overflow: scroll;
+  font-size: 22px;
+  border-radius: 5px;
+  margin-bottom: 35px;
 }
-
+#gymStatsScoreBoardTitle,
+#gymStatsScatterPlotTitle {
+  background-color: red;
+  color: white;
+  font-size: 24px;
+  padding: 12px 0;
+  text-align: center;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
 
 table {
-    border-collapse: collapse;
-    width: 100%;
+  border-collapse: collapse;
+  width: 100%;
 }
 
-#gymStatsScoreBoard table thead  th {
-    background-color: red;
-    color: white;
+#gymStatsScoreBoard table thead th {
+  background-color: red;
+  color: white;
 }
 tr {
-    height: 28px;
-    text-align: left;
+  height: 28px;
+  text-align: left;
 }
-th {
-    height: 42px;
-}
-
 th:nth-of-type(1) {
-    text-align: left;
-    padding-left: 20px;
+  text-align: left;
+  padding-left: 20px;
 }
 th:nth-of-type(4) {
-    text-align: right;
-    padding-right: 20px;
+  text-align: right;
+  padding-right: 20px;
 }
 tr:nth-of-type(even) {
-    background-color: #eeeeee;
+  background-color: #eeeeee;
 }
 tr:nth-of-type(odd) {
-    background-color: #ffffff;
+  background-color: #ffffff;
 }
 
 /* Scatter Plot */
 #scatterPlotSvg {
-    border: 1px solid black;
-    background-color: gray;
+  /* border: 1px solid black; */
+  background-color: white;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 
 /* RIGHT SIDE */
 #gymStatsRight {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Radar Chart */
 #gymStatsRadarChart {
-    background: white;
-    margin-bottom: 10px;
+  background: white;
+  margin-bottom: 10px;
+  border-radius: 5px;
 }

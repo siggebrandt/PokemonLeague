@@ -1,305 +1,308 @@
 @font-face {
-    font-family: "pokemonFont";
-    src: url(fonts/Pokemon-Pixel-Font.woff2) format('woff2');
-    font-weight: normal;
-    font-style: normal;
-  }
+  font-family: "pokemonFont";
+  src: url(fonts/Pokemon-Pixel-Font.woff2) format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
 
-body{
-    font-family: "pokemonFont", monospace;
+body {
+  font-family: "pokemonFont", monospace;
 }
 
 * {
-    margin: 0;
-    padding: 0; 
-    border: 0;
-    font-family: "pokemonFont", monospace;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-family: "pokemonFont", monospace;
 }
 
 #navBar {
-    margin: 20px;
-    display: flex;
-    position: fixed;
-    top: 90%;
-    right: 0;
-    left: 0;
-    z-index: 10;
-    justify-content: center;
+  margin: 20px;
+  display: flex;
+  position: fixed;
+  top: 90%;
+  right: 0;
+  left: 0;
+  z-index: 10;
+  justify-content: center;
 }
 
 #navBar button {
-padding: 20px;
-cursor: pointer;
+  padding: 20px;
+  cursor: pointer;
 }
 
 .hide {
-    display: none;
+  display: none;
 }
 .no-click {
-    pointer-events: none;
+  pointer-events: none;
 }
 
 /*MARKUS*/
 body {
-    margin: 0;
+  margin: 0;
 }
 
 #pokemon-page {
-    width: 100vw;
-    background-color: rgba(250, 250, 250, 0.75);
+  width: 100vw;
+  background-color: rgba(250, 250, 250, 0.75);
 }
 
 .pokemon-page-background {
-    background-image: url(bilder/choose\ pokemon.png);
-    background-position: center;
-    background-size: cover;
-    background-repeat: repeat;
-    width: 100vw;
-    height: 100vh;
+  background-image: url(bilder/choose\ pokemon.png);
+  background-position: center;
+  background-size: cover;
+  background-repeat: repeat;
+  width: 100vw;
+  height: 100vh;
 }
 
 #pokemon-page-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100vw;
-    height: 20vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100vw;
+  height: 20vh;
 }
 
 #header-contents-left,
 #header-contents-right {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #header-contents-left {
-    margin-left: 20px;
-    gap: 20px;
+  margin-left: 20px;
+  gap: 20px;
 }
 
 #header-contents-right {
-    margin-right: 25px;
+  margin-right: 25px;
 }
 
-#pokemon-page-arrow-back, #gymBannerBack {
-    background-image: url(icons/arrowback.svg);
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    width: 40px;
-    height: 40px;
+#pokemon-page-arrow-back,
+#gymBannerBack {
+  background-image: url(icons/arrowback.svg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 40px;
+  height: 40px;
 }
 
-#pokemon-page-arrow-back:hover, #gymBannerBack:hover {
-    transform: scale(1.15);
+#pokemon-page-arrow-back:hover,
+#gymBannerBack:hover {
+  transform: scale(1.15);
 }
 
-#pokemon-page-arrow-back:active, #gymBannerBack:active {
-    transform: scale(1);
-    background-image: url(icons/arrowbackactive.svg);
+#pokemon-page-arrow-back:active,
+#gymBannerBack:active {
+  transform: scale(1);
+  background-image: url(icons/arrowbackactive.svg);
 }
 
 #pokemon-picture {
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    width: 80px;
-    height: 80px;
-    border: 1px solid #93928e;
-    border-radius: 4px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 80px;
+  height: 80px;
+  border: 1px solid #93928e;
+  border-radius: 4px;
 }
 
 #pokemon-name-and-labels {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 10px;
 }
 
 #pokemon-name-label {
-    font-weight: bold;
-    margin: 0;
+  font-weight: bold;
+  margin: 0;
 }
 
 #labels-container {
-    display: flex;
-    align-items: center;
-    gap: 5px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
 .label {
-    border-radius: 4px;
-    padding: 5px;
+  border-radius: 4px;
+  padding: 5px;
 }
 
 #generation-label {
-    background-color: white;
-    border: 1px solid #93928e;
-    box-sizing: border-box;
+  background-color: white;
+  border: 1px solid #93928e;
+  box-sizing: border-box;
 }
 
 .pokemon-points-and-placement {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-end;
-    padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  padding: 20px;
 }
 
 .pokemon-points-and-placement h2,
 .pokemon-points-and-placement p {
-    margin: 0;
+  margin: 0;
 }
 
 .pokemon-points-and-placement h2 {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .seperator {
-    border-right: 1px solid #93928e;
+  border-right: 1px solid #93928e;
 }
 
 #pokemon-page-main {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 20px;
-    padding-bottom: 90px;
-    margin: 20px 25px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 20px;
+  padding-bottom: 90px;
+  margin: 20px 25px;
 }
 
 #pokemon-page-score-svg {
-    border: 1px solid #93928e;
-    border-radius: 4px;
-    background-color: white;
+  border: 1px solid #93928e;
+  border-radius: 4px;
+  background-color: white;
 }
 
 #svg-label-container {
-    text-align: right
+  text-align: right;
 }
 
-#ball-and-text-svg{
-    display: flex;
-    justify-content: center;
-    font-weight: bold;
+#ball-and-text-svg {
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
 }
 
 #pokemon-ball-svg {
-    background-image: url(bilder/2233235_0c846.png);
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    width: 20px;
-    height: 20px;
+  background-image: url(bilder/2233235_0c846.png);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 20px;
+  height: 20px;
 }
 
 .horizontal-lines-svg line {
-    stroke: #93928e;
-    z-index: -1;
+  stroke: #93928e;
+  z-index: -1;
 }
 
 #pokemon-page-table {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    background-color: white;
-    border: 1px solid #93928e;
-    border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: white;
+  border: 1px solid #93928e;
+  border-radius: 4px;
 }
 
 #table-labels,
 .table-row {
-    display: flex;
-    padding: 10px;
-    border-bottom: 1px solid black;
+  display: flex;
+  padding: 10px;
+  border-bottom: 1px solid black;
 }
 
 #table-labels {
-    gap: 60px;
-    font-weight: bold;
+  gap: 60px;
+  font-weight: bold;
 }
 
 #round-label {
-    margin-right: 66px;
+  margin-right: 66px;
 }
 
 .table-row {
-    display: flex;
-    align-items: center;
-    background-color: white;
+  display: flex;
+  align-items: center;
+  background-color: white;
 }
 
 .round-and-gym {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .round-value {
-    width: 20px;
-    margin-right: 138px;
+  width: 20px;
+  margin-right: 138px;
 }
 
 .gym-value {
-    font-size: 14px;
-    color: #93928e;
+  font-size: 14px;
+  color: #93928e;
 }
 
 .date-value {
-    width: 20px;
-    margin-right: 64px;
+  width: 20px;
+  margin-right: 64px;
 }
 
 .score-value {
-    width: 20px;
-    margin-right: 72px;
+  width: 20px;
+  margin-right: 72px;
 }
 
 .placement-value {
-    width: 14px;
-    margin-right: 91px;
-    padding: 0 5px;
-    border: 1px solid #93928e;
-    border-radius: 4px;
+  width: 14px;
+  margin-right: 91px;
+  padding: 0 5px;
+  border: 1px solid #93928e;
+  border-radius: 4px;
 }
 
 .gold {
-    background-color: gold;
-    border: 1px solid darkgoldenrod;
-    box-shadow: inset 0 2px 4px rgba(255,255,255,0.7);
+  background-color: gold;
+  border: 1px solid darkgoldenrod;
+  box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.7);
 }
 
 .silver {
-    background-color: silver;
-    border: 1px solid gray;
-    box-shadow: inset 0 2px 4px rgba(255,255,255,0.7);
+  background-color: silver;
+  border: 1px solid gray;
+  box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.7);
 }
 
 .bronze {
-    background-color: rgb(205, 127, 50);
-    border: 1px solid rgb(141, 87, 34);
-    box-shadow: inset 0 2px 4px rgba(255,255,255,0.7);
+  background-color: rgb(205, 127, 50);
+  border: 1px solid rgb(141, 87, 34);
+  box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.7);
 }
 
 .trend-value {
-    width: 24px;
+  width: 24px;
 }
 
 .negative-trend {
-    color: red;
+  color: red;
 }
 
 .positive-trend {
-    color: green;
+  color: green;
 }
 
 .last-row {
-    height: 20px;
+  height: 20px;
 }
 
 .inactive-gen-button {
-    background-color: gray;
-    color: rgb(103, 102, 102);
+  background-color: gray;
+  color: rgb(103, 102, 102);
 }

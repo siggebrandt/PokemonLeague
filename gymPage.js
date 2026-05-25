@@ -1,19 +1,5 @@
 const gymBanner = document.getElementById("gymBanner");
 
-/**
- * 
- * Ens placering i ligan är baserad på hur många poäng man har tagit under hela
-säsongen. Vid varje tävling (event) delas poäng ut enligt:
-1:a plats i eventet ger 15 poäng
-2:a plats i eventet ger 10 poäng
-3:e plats i eventet ger 6 poäng
-4:e plats i eventet ger 3 poäng
-5:e plats i eventet ger 1 poäng
-Deltagaren med högst antal poäng (alla grenar) i slutet av säsongen vinner ligan
-Det finns också ett särskilt pris för varje gren
-
- */
-
 function renderGymPageGenStats(gen) {
   if (!currentGym || !gen) return;
   document.querySelector("#gymBannerTitle").textContent =
@@ -39,9 +25,6 @@ function renderGymPage(gym, gen) {
     `${gym.gymName} - Generation ${Number(gen.year) + 1}`;
 
   gymBanner.style.backgroundColor = gym.color;
-  /**
-   * #gymStatsScoreBoardTitle, #gymStatsScatterPlotTitle
-   */
   document
     .querySelectorAll("#gymStatsScoreBoard table thead th")
     .forEach((th) => {

@@ -28,13 +28,11 @@
   filter: invert(1);
 }
 
-/* LEFT SIDE */
 #gymStatsLeft {
   display: flex;
   flex-direction: column;
 }
 
-/* Score Board */
 #gymStatsScoreBoard {
   height: 400px;
   width: 725px;
@@ -82,21 +80,17 @@ tr:nth-of-type(odd) {
   background-color: #ffffff;
 }
 
-/* Scatter Plot */
 #scatterPlotSvg {
-  /* border: 1px solid black; */
   background-color: white;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
 }
 
-/* RIGHT SIDE */
 #gymStatsRight {
   display: flex;
   flex-direction: column;
 }
 
-/* Radar Chart */
 #gymStatsRadarChart {
   background: white;
   margin-bottom: 10px;

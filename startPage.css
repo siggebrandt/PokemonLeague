@@ -1,150 +1,149 @@
 #startPage {
-    background-image: url(bilder/feeling_the_alolan_nature_by_phyromatical_dcj41y1-414w-2x.jpg);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+  background-image: url(bilder/feeling_the_alolan_nature_by_phyromatical_dcj41y1-414w-2x.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 #whiteFilter {
-    background-color:rgba(255, 255, 255, 0.70);
+  background-color: rgba(255, 255, 255, 0.7);
 }
 
 #startPageContainer {
-    display: flex;
-    flex-direction: column;
-    gap: 100px;
-    padding: 45px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 100px;
+  padding: 45px 0;
 }
 
 #startPageTextContainer {
-    display: flex;
-    flex-direction: column;
-    margin: auto;
-    text-align: center;
-    gap: 15px;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  text-align: center;
+  gap: 15px;
 }
 
 #startPageTitle {
-    font-size: 70px;
+  font-size: 70px;
 }
 
 #generationText {
-    font-size: 25px;
+  font-size: 25px;
 }
 
 #gymSmallTitle {
-    margin-left: 25px;
-    margin-bottom: 12px;
+  margin-left: 25px;
+  margin-bottom: 12px;
 }
 
 #pokemonSmallTitle {
-    margin-left: 21px;
+  margin-left: 21px;
 }
 
 #pokemonGrid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    gap: 16px;
-    padding: 16px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 16px;
+  padding: 16px;
 }
 
 .pokemonCard {
-    border: 2px solid #ccc;
-    border-radius: 8px;
-    overflow: hidden;
-    cursor: pointer;
-    width: 120px;
-    display: flex;
-    flex-direction: column;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  width: 120px;
+  display: flex;
+  flex-direction: column;
 }
 
 .pokemonCardImage {
-    width: 100%;
-    object-fit: contain;
-    background-color: #e8f4e8;
+  width: 100%;
+  object-fit: contain;
+  background-color: #e8f4e8;
 }
 
 .pokemonName {
-    text-align: center;
-    padding: 15px 0;
-    background-color: white;
-    font-size: 18px;
-    margin: 0px;
+  text-align: center;
+  padding: 15px 0;
+  background-color: white;
+  font-size: 18px;
+  margin: 0px;
 }
 
 #gymCardContainer {
-    display: flex;
-    justify-content: space-around;
+  display: flex;
+  justify-content: space-around;
 }
 
 .gymCards {
-    display: flex;
-    flex-direction: column;
-    cursor: pointer;
-    width: 250px;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  width: 250px;
 }
 
 .gymImages {
-    width: 100%;
-    object-fit: cover;
-    border-radius: 10px 10px 0 0;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 10px 10px 0 0;
 }
 
 .gymNames {
-    padding: 25px;
-    font-size: 20px;
-    font-weight: bold;
-    text-align: center;
-    color: white;
-    border-radius: 0 0 10px 10px;
+  padding: 25px;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  color: white;
+  border-radius: 0 0 10px 10px;
 }
 
 #radarChartHoverDiv {
-    display: none;
-    position: fixed;
-    padding: 8px;
+  display: none;
+  position: fixed;
+  padding: 8px;
 }
 
 #radarChartSkillDisplay {
-    display: flex;
-    flex-direction: column;
-    padding: 0 10px;
-    background-color: white;
-    border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  padding: 0 10px;
+  background-color: white;
+  border-radius: 5px;
 }
 
 .skillRow {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .leftSkill {
-    display: flex;
-    align-items: center;
-
+  display: flex;
+  align-items: center;
 }
 
 .leftImage {
-    width: 30px;
-    height: 30px;
-} 
+  width: 30px;
+  height: 30px;
+}
 
 .rightSkill {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .rightBar {
-    width: 150px;
-    height: 8px;
-    background: lightgrey;
-    border-radius: 4px;
-  }
+  width: 150px;
+  height: 8px;
+  background: lightgrey;
+  border-radius: 4px;
+}
 
-  .navBarChosen {
-    background-color: black;
-    color: white;
-  }
+.navBarChosen {
+  background-color: black;
+  color: white;
+}

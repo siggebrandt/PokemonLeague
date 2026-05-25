@@ -1,6 +1,5 @@
 const gymBanner = document.getElementById("gymBanner")
 
-
 /**
  * 
  * Ens placering i ligan är baserad på hur många poäng man har tagit under hela
@@ -17,8 +16,8 @@ Det finns också ett särskilt pris för varje gren
 
 function renderGymPageGenStats (gen) {
   if (!currentGym || !gen) return;
-    console.log("CHOSEN", gen)
-    console.log("currentGYM", currentGym)
+/*     console.log("CHOSEN", gen)
+    console.log("currentGYM", currentGym) */
     document.querySelector("#gymBannerTitle").textContent = `${currentGym.gymName} - Generation ${Number(gen.year) + 1}`;
   } ;
 
@@ -82,13 +81,16 @@ function pokemonIdToName(pokemonId) {
   return foundPokemon.pokemonName;
 }
 
-function pokemonsTrainerforGen (pokemon, gen) {
-  gen.trainers.forEach((trainer) => { 
-    //trainers hitta o jämföra participant id & trainerID
-  })
+function pokemonsTrainerforGen(pokemonId, gen) {
+    // Hitta kopplingen participantId → trainerId i denna gen
+    const trainerLink = gen.trainers.find((t) => t.participantId == pokemonId);
+    if (!trainerLink) return "Okänd";
 
-  // 
+    // Slå upp tränarens namn i globala trainers-arrayen
+    const trainer = trainers.find((t) => t.id == trainerLink.trainerId);
+    return trainer ? trainer.name : "Okänd";
 }
+
 
 function gymScoreBoard (participatingPokemons) {
     const tableBody = document.querySelector("#gymStatsScoreBoard table tbody");
@@ -104,14 +106,13 @@ function gymScoreBoard (participatingPokemons) {
       const tableDataPokemon = document.createElement("td");
       tableDataPokemon.textContent = pokemonIdToName(pokemon.id);
       const tableDataTrainer = document.createElement("td");
-      tableDataTrainer.textContent = "trainer" // trainerIdToName
+      tableDataTrainer.textContent = pokemonsTrainerforGen(pokemon.id, currentGen[0]);
       tableDataTrainer.style.textAlign = "center"
       const tableDataScore = document.createElement("td");
       tableDataScore.textContent = pokemon.totalScore;
       tableDataScore.style.textAlign = "right"
       tableRow.append(tableDataPokemon, tableDataTrainer, tableDataScore);
     });
-    
 }
 
 document.querySelector("#gymBannerBack").addEventListener("click", function () {

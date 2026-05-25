@@ -1,5 +1,24 @@
 const gymBanner = document.getElementById("gymBanner")
 
+
+/**
+ * 
+ * Ens placering i ligan är baserad på hur många poäng man har tagit under hela
+säsongen. Vid varje tävling (event) delas poäng ut enligt:
+1:a plats i eventet ger 15 poäng
+2:a plats i eventet ger 10 poäng
+3:e plats i eventet ger 6 poäng
+4:e plats i eventet ger 3 poäng
+5:e plats i eventet ger 1 poäng
+Deltagaren med högst antal poäng (alla grenar) i slutet av säsongen vinner ligan
+Det finns också ett särskilt pris för varje gren
+
+ */
+
+function renderGymPageGenStats (chosenGen) {
+
+}
+
 function renderGymPage(gym, gen) {
     document.getElementById("radarChartSvg").innerHTML = "";
     document.getElementById("radarChartSkillDisplay").innerHTML = "";
@@ -70,7 +89,6 @@ function pokemonsTrainerforGen (pokemon, gen) {
 }
 
 function gymScoreBoard (participatingPokemons) {
-    // bygger hela scoreboarden
     const tableBody = document.querySelector("#gymStatsScoreBoard table tbody");
 
     let tableIndex = 1;
@@ -90,62 +108,8 @@ function gymScoreBoard (participatingPokemons) {
       tableDataScore.textContent = pokemon.totalScore;
       tableDataScore.style.textAlign = "right"
       tableRow.append(tableDataPokemon, tableDataTrainer, tableDataScore);
-      
-      /* const row = document.createElement("tr"); */
-
     });
     
-    /* document.querySelector("#gymStatsScoreBoard table tbody").innerHTML = `
-    <tr>
-      <th>1</th>
-      <td>1976</td>
-      <td>9</td>
-      <td>1223</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>1976</td>
-      <td>6</td>
-      <td>1123</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>1976</td>
-      <td>10</td>
-      <td>1123</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>1975</td>
-      <td>1</td>
-      <td>1123</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>1976</td>
-      <td>13</td>
-      <td>1123</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>1976</td>
-      <td>11</td>
-      <td>1123</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>1977</td>
-      <td>10</td>
-      <td>1123</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>1974</td>
-      <td>17</td>
-      <td>1123</td>
-    </tr>
-    ` */
-    //document.getElementById("gymStatsScoreBoard").innerHTML += gymScoreCalculateFinalScore(gym, gen);
 }
 
 document.querySelector("#gymBannerBack").addEventListener("click", function () {

@@ -54,7 +54,7 @@
     border-radius: 8px;
     overflow: hidden;
     cursor: pointer;
-    width: 130px;
+    width: 120px;
     display: flex;
     flex-direction: column;
 }

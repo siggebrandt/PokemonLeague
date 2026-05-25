@@ -196,6 +196,30 @@ body {
       background-color: white;
 }
 
+#svg-label-container {
+    text-align: right
+}
+
+#ball-and-text-svg{
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+}
+
+#pokemon-ball-svg {
+    background-image: url(bilder/2233235_0c846.png);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 20px;
+    height: 20px;
+}
+
+.horizontal-lines-svg line {
+    stroke: #93928e;
+    z-index: -1;
+}
+
 #pokemon-page-tabel {
     display: flex;
     flex-direction: column;

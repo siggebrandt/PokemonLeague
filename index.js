@@ -424,8 +424,6 @@ function renderPokemonPage(pokemon) {
 
 
     // Fyller i poäng och placering på höger sida av navbaren.
-
-    // Kolla upp .flatMap, med .map får man en massa arrayer inuti arrayer t.ex: [[1], [2], [3], [4]], men med.flatMap samlas alla scores t.ex såhär: [1, 2, 3, 4].
     const scores = currentGen.flatMap(gen => gen.competitionDays).flatMap(day => day.events).flatMap(event => event.scores).filter(score => score.participantId === pokemon.id).flatMap(id => id.score);
 
     // Räknar ut vilket som var pokemonens högsta score.
@@ -493,9 +491,9 @@ function renderPokemonPage(pokemon) {
         .domain([d3.min(scoreAndDateData, data => data.score) - 50, d3.max(scoreAndDateData, data => data.score) + 50])
         .range([height - margin, margin]);
 
-    const line = d3.line()
-        .x(data => xScale(data.date) + xScale.bandwidth() / 2)
-        .y(data => yScale(data.score));
+  const line = d3.line()
+    .x(d => xScale(d.date))
+    .y(d => yScale(d.score));
 
     svg.append("path")
         .datum(scoreAndDateData)
@@ -506,10 +504,12 @@ function renderPokemonPage(pokemon) {
     const tooltip = d3.select("body")
         .append("div")
         .style("position", "absolute")
-        .style("background", "white")
-        .style("padding", "5px")
-        .style("border", "1px solid black")
-        .style("display", "none");
+        .style("padding", "2px 5px 2px 0")
+        .style("display", "none")
+        .style("background-color", `${pokemon.colors[1]}`)
+        .style("border", "none")
+        .style("border-radius", "4px")
+        .style("box-shadow", "0 2px 8px rgba(0,0,0,0.15), 0 4px 20px rgba(0,0,0,0.08)");
 
     svg.selectAll("image")
         .data(scoreAndDateData.filter((d, i) => i % 10 === 0))
@@ -523,9 +523,7 @@ function renderPokemonPage(pokemon) {
         .on("mouseover", function (event, d) {
             tooltip
                 .style("display", "block")
-                .style("background-color", `${pokemon.colors[1]}`)
-                .style("border", "none")
-                .html(`Score: ${d.score}`);
+                .html(`<div id="svg-label-container"><p>${d.date}</p><div id="ball-and-text-svg"><div id="pokemon-ball-svg"></div><p id="score-label-svg">${d.score} points</p></div></div>`);
         })
         .on("mousemove", function (event) {
             tooltip
@@ -548,6 +546,10 @@ function renderPokemonPage(pokemon) {
     svg.append("g")
         .attr("transform", `translate(${margin}, 0)`)
         .call(d3.axisLeft(yScale));
+
+    const innerWidth = width - margin - margin;
+    const g = svg.append("g")
+        .attr("transform", `translate(${margin, margin})`);
 
     svg.append("text")
         .attr("x", width / 2)

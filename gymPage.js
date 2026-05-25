@@ -221,7 +221,7 @@ function createScatterPlot(gym, gen) {
     .attr("fill", (pokemon) => {
       const foundPokemon = participants.find((p) => p.id == pokemon.id);
       if (foundPokemon) {
-        return foundPokemon.colors[1];
+        return foundPokemon.colors[2];
       } else {
         return "#999";
       }
@@ -231,7 +231,7 @@ function createScatterPlot(gym, gen) {
     .append("title")
     .text((pokemon) => {
       const name = pokemonIdToName(pokemon.id);
-      return `${name}\nScore: ${pokemon.totalScore}\Competitions: ${pokemon.competitions}`;
+      return `${name}\nScore: ${pokemon.totalScore}\nCompetitions: ${pokemon.competitions}`;
     });
 }
 

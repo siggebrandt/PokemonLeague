@@ -35,6 +35,7 @@ seasons.forEach((generation, index) => {
 
     genButton.addEventListener("click", () => {
         gymCardContainer.classList.remove("no-click");
+        pokemonGrid.classList.remove("no-click");
         document.querySelectorAll("#navBar button").forEach(button => {
             button.classList.remove("navBarChosen");
         });

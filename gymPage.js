@@ -6,7 +6,6 @@ function renderGymPage(gym, gen) {
     console.log("GEN", gen);
     console.log("GYM", gym);
     
-
     startPage.classList.add("hide");
     gymPage.classList.remove("hide");
 
@@ -18,11 +17,6 @@ function renderGymPage(gym, gen) {
     createSkillList(gym);
     let pokemonsInGymAndGen = gymScoreCalculateFinalScore(gym, gen);
     gymScoreBoard(pokemonsInGymAndGen)
-
-
-    //console.log("Competitions:", gen.competitionDays)
-
-    //gymScoreCalculateFinalScore(gym, gen)
 }
 
 function renderGymPageGenStats (gen) {

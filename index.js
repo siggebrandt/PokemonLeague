@@ -67,7 +67,6 @@ function createRadarChart(gym) {
   drawBackgroundPolygon(maxRadius, numOfSkills, anglePerSkill, centerPoint);
 
   skillPoints.forEach((skill, index) => {
-    //console.log(skill, index)
     //Räknar ut vinkeln för denna punkt. - Math.PI / 2 gör så att första punkten börjar högst upp.
     let angle = index * anglePerSkill - Math.PI / 2;
     //x och y är kordinater för punkten. Skill * scale skalar upp värdet så det är synligt men man hade
@@ -158,7 +157,6 @@ function drawBackgroundPolygon(
 function createSkillList(gym) {
   radarChartSkillDisplay.innerHTML = ``;
   let skillPoints = [];
-  console.log(gym.skillFactors);
   for (let skill in gym.skillFactors) {
     skillPoints.push(gym.skillFactors[skill]);
   }

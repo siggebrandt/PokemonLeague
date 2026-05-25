@@ -15,8 +15,6 @@ function renderGymPage(gym, gen) {
   currentGym = gym;
   document.getElementById("radarChartSvg").innerHTML = "";
   document.getElementById("radarChartSkillDisplay").innerHTML = "";
-  console.log("GEN", gen);
-  console.log("GYM", gym);
 
   startPage.classList.add("hide");
   gymPage.classList.remove("hide");
@@ -68,7 +66,6 @@ function gymScoreCalculateFinalScore(gym, gen) {
   participatingPokemons.sort((a, b) => {
     return b.totalScore - a.totalScore;
   });
-  console.log("PARTICIPATING POKEMONS:", participatingPokemons);
   return participatingPokemons;
 }
 

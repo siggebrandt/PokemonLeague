@@ -30,6 +30,7 @@ body {
 #navBar button {
   padding: 20px;
   cursor: pointer;
+  font-size: 19px;
 }
 
 .hide {

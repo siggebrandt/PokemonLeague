@@ -1,4 +1,4 @@
-# Pokemon Tournament
+# Pokemon League
 
 **Project, Web-based Data Visualisation, Malmö University, Spring Semester 2026**
 

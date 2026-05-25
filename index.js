@@ -375,7 +375,7 @@ function renderPokemonPage(pokemon) {
         .attr("text-anchor", "middle")
         .style("font-size", "24px")
         .style("font-weight", "bold")
-        .text("Score over time");
+        .text("Score Over Time");
 
           while (pokemonPageTable.children.length > 1) {
         pokemonPageTable.lastElementChild.remove();

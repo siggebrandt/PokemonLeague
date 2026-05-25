@@ -189,7 +189,7 @@ function createSkillList(gym) {
     })
 }
 
-// Pokemonsida
+// Pokemonsida MARKUS
 function renderPokemonPage(pokemon) {
     pokemonPageArrowBack.addEventListener("click", function () {
         body.classList.remove("pokemon-page-background");

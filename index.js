@@ -189,188 +189,7 @@ function createSkillList(gym) {
     })
 }
 
-
-//GYMSIDA
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// Pokemonsida
 function renderPokemonPage(pokemon) {
     pokemonPageArrowBack.addEventListener("click", function () {
         body.classList.remove("pokemon-page-background");
@@ -427,20 +246,17 @@ function renderPokemonPage(pokemon) {
     // Fyller i poäng och placering på höger sida av navbaren.
     const scores = currentGen.flatMap(gen => gen.competitionDays).flatMap(day => day.events).flatMap(event => event.scores).filter(score => score.participantId === pokemon.id).flatMap(id => id.score);
 
-    // Räknar ut vilket som var pokemonens högsta score.
     let highscore = 0;
     scores.forEach(score => {
         highscore = score > highscore ? score : highscore;
     })
     pokemonTopScore.textContent = `${highscore}`;
 
-    // Räknar ihop alla scores pokemonen fått.
     const totalScore = scores.reduce((acc, current) => {
         return acc + current;
     }, 0);
     pokemonTotalScore.textContent = `${totalScore}`;
 
-    // Jämför min valda pokemons score med de andra i samma omgång för att ta reda på vilken runda den spelade bäst i.
     const gameDays = currentGen.flatMap(gen => gen.competitionDays).flatMap(day => day.events).map(event => event.scores).filter(score => score.some(participant => participant.participantId === pokemon.id));
 
     let allPlacements = [];
@@ -457,6 +273,7 @@ function renderPokemonPage(pokemon) {
         if (myTopPlacement > placement) myTopPlacement = placement;
     }
     pokemonTopPlacement.textContent = `#${myTopPlacement}`;
+
 
     // Graf
     pokemonPageScoreSvg.textContent = "";
